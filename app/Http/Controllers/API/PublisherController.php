@@ -12,6 +12,24 @@ class PublisherController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/publishers",
+     *     summary="Get list of publishers",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Search by name or address",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of publishers retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = Publisher::query();
@@ -32,6 +50,45 @@ class PublisherController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/publishers",
+     *     summary="Create a new publisher",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=true,
+     *         description="Name of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="address",
+     *         in="query",
+     *         required=false,
+     *         description="Address of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="phone",
+     *         in="query",
+     *         required=false,
+     *         description="Phone number of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=false,
+     *         description="Email of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Publisher created successfully"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -62,6 +119,24 @@ class PublisherController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/publishers/{id}",
+     *     summary="Get a publisher by ID",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the publisher",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Publisher retrieved successfully"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $publisher = Publisher::with('books')->find($id);
@@ -81,6 +156,52 @@ class PublisherController extends Controller
 
     /**
      * Update the specified resource in storage.
+     */
+    /**
+     * @OA\Put(
+     *     path="/api/publishers/{id}",
+     *     summary="Update a publisher by ID",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the publisher",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=false,
+     *         description="Name of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="address",
+     *         in="query",
+     *         required=false,
+     *         description="Address of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="phone",
+     *         in="query",
+     *         required=false,
+     *         description="Phone number of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=false,
+     *         description="Email of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Publisher updated successfully"
+     *     )
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -119,6 +240,24 @@ class PublisherController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/publishers/{id}",
+     *     summary="Delete a publisher by ID",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the publisher",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Publisher deleted successfully"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {

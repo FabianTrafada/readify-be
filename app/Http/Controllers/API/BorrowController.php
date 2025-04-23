@@ -15,6 +15,24 @@ class BorrowController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/borrows",
+     *     summary="Get list of borrows",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Search by user_id or book_id",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of borrows retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = Borrow::with(['user', 'book']);
@@ -49,6 +67,52 @@ class BorrowController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/borrows",
+     *     summary="Create a new borrow",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         required=true,
+     *         description="User ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         in="query",
+     *         required=true,
+     *         description="Book ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="borrow_date",
+     *         in="query",
+     *         required=true,
+     *         description="Borrow date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Parameter(
+     *         name="due_date",
+     *         in="query",
+     *         required=true,
+     *         description="Due date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Parameter(
+     *         name="notes",
+     *         in="query",
+     *         required=false,
+     *         description="Notes",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Borrow created successfully"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -102,6 +166,24 @@ class BorrowController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/borrows/{id}",
+     *     summary="Get a specific borrow",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the borrow record",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Borrow record retrieved successfully"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $borrow = Borrow::with(['user', 'book', 'fine'])->find($id);
@@ -121,6 +203,24 @@ class BorrowController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     */
+    /**
+     * @OA\Put(
+     *     path="/api/borrows/{id}/return",
+     *     summary="Return a book",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the borrow record",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Book returned successfully"
+     *     )
+     * )
      */
     public function returnBook(Request $request, $id)
     {
@@ -191,6 +291,24 @@ class BorrowController extends Controller
     
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/borrows/{id}",
+     *     summary="Delete a borrow record",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the borrow record",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Borrow record deleted successfully"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
