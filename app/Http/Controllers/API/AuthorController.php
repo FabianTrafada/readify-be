@@ -12,6 +12,24 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/authors",
+     *     summary="Get list of authors",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Search by name or biography",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of authors retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = Author::query();
@@ -32,6 +50,42 @@ class AuthorController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/authors",
+     *     summary="Create a new author",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=true,
+     *         description="Author name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="biography",
+     *         in="query",
+     *         required=false,
+     *         description="Author biography",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="birth_date",
+     *         in="query",
+     *         required=false,
+     *         description="Author birth date",
+     *         @OA\Schema(type="date")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Author created successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -61,6 +115,28 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/authors/{id}",
+     *     summary="Get author by ID",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Author ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $author = Author::with('books')->find($id);
@@ -80,6 +156,49 @@ class AuthorController extends Controller
 
     /**
      * Update the specified resource in storage.
+     */
+    /**
+     * @OA\Put(
+     *     path="/api/authors/{id}",
+     *     summary="Update an author",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Author ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=false,
+     *         description="Author name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="biography",
+     *         in="query",
+     *         required=false,
+     *         description="Author biography",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="birth_date",
+     *         in="query",
+     *         required=false,
+     *         description="Author birth date",
+     *         @OA\Schema(type="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author updated successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -117,6 +236,28 @@ class AuthorController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/authors/{id}",
+     *     summary="Delete an author",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Author ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author deleted successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
