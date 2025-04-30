@@ -12,6 +12,24 @@ class FineController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/fines",
+     *     summary="Get list of fines",
+     *     tags={"Fines"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Search by user_id or borrow_id",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of fines retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = Fine::with(['user', 'borrow']);
@@ -37,6 +55,24 @@ class FineController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/fines/{id}",
+     *     summary="Get a fine by ID",
+     *     tags={"Fines"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the fine",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Fine retrieved successfully"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $fine = Fine::with(['user', 'borrow'])->find($id);
@@ -56,6 +92,31 @@ class FineController extends Controller
 
     /**
      * Update the specified resource in storage.
+     */
+    /**
+     * @OA\Put(
+     *     path="/api/fines/{id}",
+     *     summary="Pay a fine by ID",
+     *     tags={"Fines"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the fine",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="paid_date",
+     *         in="query",
+     *         required=true,
+     *         description="Date the fine was paid",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Fine paid successfully"
+     *     )
+     * )
      */
     public function payFine(Request $request, string $id)
     {
