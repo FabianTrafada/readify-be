@@ -9,8 +9,59 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
 class AuthController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     summary="Register a new user",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=true,
+     *         description="User name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=true,
+     *         description="User email",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         required=true,
+     *         description="User password",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="phone_number",
+     *         in="query",
+     *         required=false,
+     *         description="User phone number",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="address",
+     *         in="query",
+     *         required=false,
+     *         description="User address",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="User registered successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -50,6 +101,63 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/create-admin",
+     *     summary="Create an admin user",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=true,
+     *         description="User name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=true,
+     *         description="User email",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         required=true,
+     *         description="User password",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="phone_number",
+     *         in="query",
+     *         required=false,
+     *         description="User phone number",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="address",
+     *         in="query",
+     *         required=false,
+     *         description="User address",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="role",
+     *         in="query",
+     *         required=true,
+     *         description="User role",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Admin user created successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
+     */
     public function createAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -85,6 +193,17 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/all-users",
+     *     summary="Get all users",
+     *     tags={"Auth"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="All users retrieved successfully"
+     *     )
+     * )
+     */
     public function getAllUsers()
     {
         $users = User::paginate(10);
@@ -95,6 +214,39 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/update-user-role/{id}",
+     *     summary="Update user role",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="User ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="role",
+     *         in="query",
+     *         required=true,
+     *         description="User role",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="User role updated successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
+     */
     public function updateUserRole(Request $request, $id)
     {
         $user = User::find($id);
@@ -128,6 +280,39 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     summary="Login user",
+     *     tags={"Auth"},
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         required=true,
+     *         description="User email",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         required=true,
+     *         description="User password",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="User logged in successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Invalid credentials"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validation error"
+     *     )
+     * )
+     */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -163,6 +348,17 @@ class AuthController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     summary="Logout user",
+     *     tags={"Auth"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="User logged out successfully"
+     *     )
+     * )
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -173,6 +369,17 @@ class AuthController extends Controller
         ], 200);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/profile",
+     *     summary="Get user profile",
+     *     tags={"Auth"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="User profile retrieved successfully"
+     *     )
+     * )
+     */
     public function profile()
     {
         return response()->json([
