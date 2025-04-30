@@ -12,6 +12,24 @@ class BookShelfController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/book-shelves",
+     *     summary="Get list of book shelves",
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         required=false,
+     *         description="Search by code or location",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of book shelves retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = BookShelf::query();
@@ -32,6 +50,45 @@ class BookShelfController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *     path="/api/book-shelves",
+     *     summary="Create a new book shelf",
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(
+     *         name="code",
+     *         in="query",
+     *         required=true,
+     *         description="Book shelf code",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="location",
+     *         in="query",
+     *         required=true,
+     *         description="Book shelf location",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="capacity",
+     *         in="query",
+     *         required=true,
+     *         description="Book shelf capacity",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="description",
+     *         in="query",
+     *         required=false,
+     *         description="Book shelf description",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Book shelf created successfully"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -62,6 +119,24 @@ class BookShelfController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/api/book-shelves/{id}",
+     *     summary="Get a book shelf by ID",
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Book shelf ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Book shelf retrieved successfully"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $bookShelf = BookShelf::with('books')->find($id);
@@ -81,6 +156,52 @@ class BookShelfController extends Controller
 
     /**
      * Update the specified resource in storage.
+     */
+    /**
+     * @OA\Put(
+     *     path="/api/book-shelves/{id}",
+     *     summary="Update a book shelf by ID",
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Book shelf ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="code",
+     *         in="query",
+     *         required=false,
+     *         description="Book shelf code",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="location",
+     *         in="query",
+     *         required=false,
+     *         description="Book shelf location",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="capacity",
+     *         in="query",
+     *         required=false,
+     *         description="Book shelf capacity",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="description",
+     *         in="query",
+     *         required=false,
+     *         description="Book shelf description",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Book shelf updated successfully"
+     *     )
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -119,6 +240,24 @@ class BookShelfController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/book-shelves/{id}",
+     *     summary="Delete a book shelf by ID",
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Book shelf ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Book shelf deleted successfully"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {
