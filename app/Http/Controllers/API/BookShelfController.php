@@ -32,15 +32,10 @@ class BookShelfController extends Controller
      */
     public function index(Request $request)
     {
-        $query = BookShelf::query();
-
-        if ($request->has('search')) {
-            $search = $request->search;
+        $bookShelves = BookShelf::when($request->search, function ($query, $search) {
             $query->where('code', 'like', "%{$search}%")
                   ->orWhere('location', 'like', "%{$search}%");
-        }
-
-        $bookShelves = $query->paginate(10);
+        })->paginate(10);
 
         return response()->json([
             'status' => true,
@@ -92,12 +87,14 @@ class BookShelfController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'code' => 'required|string|max:50|unique:book_shelves',
             'location' => 'required|string|max:255',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -214,12 +211,14 @@ class BookShelfController extends Controller
             ], 404);
         }
 
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'code' => 'sometimes|required|string|max:50|unique:book_shelves,code,' . $id,
             'location' => 'sometimes|required|string|max:255',
             'capacity' => 'sometimes|required|integer|min:1',
             'description' => 'nullable|string'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -270,7 +269,6 @@ class BookShelfController extends Controller
             ], 404);
         }
 
-        // Check if there are books assigned to this shelf
         if ($bookShelf->books()->count() > 0) {
             return response()->json([
                 'status' => false,

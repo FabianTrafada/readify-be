@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
  *      title="Readify API Documentation",
  *      description="API documentation for Readify application",
  *      @OA\Contact(
- *          email="iydheko@gmail.com"
+ *          email="muhammadzelvan263@gmail.com"
  *      )
  * )
  * @OA\Server(
