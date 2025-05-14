@@ -11,7 +11,7 @@ class BookController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/books",
+     *     path="/books",
      *     summary="Retrieve list of books with optional filters",
      *     tags={"Books"},
      *     @OA\Parameter(name="search", in="query", required=false, description="Keyword for title, ISBN, or description", @OA\Schema(type="string")),
@@ -46,7 +46,7 @@ class BookController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/books",
+     *     path="/books",
      *     summary="Add a new book",
      *     tags={"Books"},
      *     @OA\RequestBody(required=true, @OA\JsonContent(
@@ -114,7 +114,7 @@ class BookController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/books/{id}",
+     *     path="/books/{id}",
      *     summary="Fetch a specific book by ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
@@ -141,7 +141,7 @@ class BookController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/books/{id}",
+     *     path="/books/{id}",
      *     summary="Update existing book",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
@@ -209,7 +209,7 @@ class BookController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/books/{id}",
+     *     path="/books/{id}",
      *     summary="Remove a book by ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),

@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/register",
+     *     path="/register",
      *     summary="Register a new user",
      *     tags={"Auth"},
      *     @OA\Parameter(
@@ -67,7 +67,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
             'phone_number' => 'nullable|string|max:20',
             'address' => 'nullable|string'
         ]);
@@ -103,7 +103,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/create-admin",
+     *     path="/create-admin",
      *     summary="Create an admin user",
      *     tags={"Auth"},
      *     @OA\Parameter(
@@ -195,7 +195,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/all-users",
+     *     path="/all-users",
      *     summary="Get all users",
      *     tags={"Auth"},
      *     @OA\Response(
@@ -216,7 +216,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/update-user-role/{id}",
+     *     path="/update-user-role/{id}",
      *     summary="Update user role",
      *     tags={"Auth"},
      *     @OA\Parameter(
@@ -282,7 +282,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/login",
+     *     path="/login",
      *     summary="Login user",
      *     tags={"Auth"},
      *     @OA\Parameter(
@@ -350,7 +350,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/logout",
+     *     path="/logout",
      *     summary="Logout user",
      *     tags={"Auth"},
      *     @OA\Response(
@@ -371,7 +371,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/profile",
+     *     path="/profile",
      *     summary="Get user profile",
      *     tags={"Auth"},
      *     @OA\Response(

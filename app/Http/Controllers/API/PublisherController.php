@@ -14,7 +14,7 @@ class PublisherController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/publishers",
+     *     path="/publishers",
      *     summary="Get list of publishers",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -53,7 +53,7 @@ class PublisherController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/publishers",
+     *     path="/publishers",
      *     summary="Create a new publisher",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -121,7 +121,7 @@ class PublisherController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/publishers/{id}",
+     *     path="/publishers/{id}",
      *     summary="Get a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -159,7 +159,7 @@ class PublisherController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/publishers/{id}",
+     *     path="/publishers/{id}",
      *     summary="Update a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -243,7 +243,7 @@ class PublisherController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/publishers/{id}",
+     *     path="/publishers/{id}",
      *     summary="Delete a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(

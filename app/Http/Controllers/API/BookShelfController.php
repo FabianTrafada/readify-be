@@ -14,7 +14,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/book-shelves",
+     *     path="/book-shelves",
      *     summary="Get list of book shelves",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -48,7 +48,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/book-shelves",
+     *     path="/book-shelves",
      *     summary="Create a new book shelf",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -118,7 +118,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Get a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -156,7 +156,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Update a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -242,7 +242,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Delete a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(

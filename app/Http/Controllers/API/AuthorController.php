@@ -14,7 +14,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/authors",
+     *     path="/authors",
      *     summary="Get list of authors",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -53,7 +53,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/authors",
+     *     path="/authors",
      *     summary="Create a new author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -117,7 +117,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Get author by ID",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -159,7 +159,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Update an author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -239,7 +239,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Delete an author",
      *     tags={"Authors"},
      *     @OA\Parameter(

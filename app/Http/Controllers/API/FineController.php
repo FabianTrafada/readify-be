@@ -14,7 +14,7 @@ class FineController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/fines",
+     *     path="/fines",
      *     summary="Get list of fines",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -57,7 +57,7 @@ class FineController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/fines/{id}",
+     *     path="/fines/{id}",
      *     summary="Get a fine by ID",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -95,7 +95,7 @@ class FineController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/fines/{id}",
+     *     path="/fines/{id}",
      *     summary="Pay a fine by ID",
      *     tags={"Fines"},
      *     @OA\Parameter(

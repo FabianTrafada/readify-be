@@ -14,7 +14,7 @@ class ReservationController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/reservations",
+     *     path="/reservations",
      *     summary="Get list of reservations",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -76,7 +76,7 @@ class ReservationController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/reservations",
+     *     path="/reservations",
      *     summary="Create a new reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -165,7 +165,7 @@ class ReservationController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/reservations/{id}",
+     *     path="/reservations/{id}",
      *     summary="Get a specific reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -203,7 +203,7 @@ class ReservationController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/reservations/{id}",
+     *     path="/reservations/{id}",
      *     summary="Update a reservation's status",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -266,7 +266,7 @@ class ReservationController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/reservations/{id}",
+     *     path="/reservations/{id}",
      *     summary="Delete a reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(

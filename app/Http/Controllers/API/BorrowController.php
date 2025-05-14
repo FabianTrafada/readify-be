@@ -17,7 +17,7 @@ class BorrowController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/borrows",
+     *     path="/borrows",
      *     summary="Get list of borrows",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -70,7 +70,7 @@ class BorrowController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/borrows",
+     *     path="/borrows",
      *     summary="Create a new borrow",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -168,7 +168,7 @@ class BorrowController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/borrows/{id}",
+     *     path="/borrows/{id}",
      *     summary="Get a specific borrow",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -206,7 +206,7 @@ class BorrowController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/borrows/{id}/return",
+     *     path="/borrows/{id}/return",
      *     summary="Return a book",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -294,7 +294,7 @@ class BorrowController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/borrows/{id}",
+     *     path="/borrows/{id}",
      *     summary="Delete a borrow record",
      *     tags={"Borrows"},
      *     @OA\Parameter(

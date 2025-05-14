@@ -4,7 +4,7 @@
         "title": "Readify API Documentation",
         "description": "API documentation for Readify application",
         "contact": {
-            "email": "iydheko@gmail.com"
+            "email": "muhammadzelvan263@gmail.com"
         },
         "version": "1.0.0"
     },
@@ -15,13 +15,13 @@
         }
     ],
     "paths": {
-        "/api/register": {
+        "/register": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Register a new user",
-                "operationId": "a718f172ff3ac464d723835815f8fb57",
+                "operationId": "e66f8a7452e13b03ae4e77dbb42e435c",
                 "parameters": [
                     {
                         "name": "name",
@@ -79,13 +79,13 @@
                 }
             }
         },
-        "/api/create-admin": {
+        "/create-admin": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Create an admin user",
-                "operationId": "15ea403b23ce163e9111c72cfd86c1a1",
+                "operationId": "b31f9633ee346601d04b5883e34bd806",
                 "parameters": [
                     {
                         "name": "name",
@@ -152,13 +152,13 @@
                 }
             }
         },
-        "/api/all-users": {
+        "/all-users": {
             "get": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Get all users",
-                "operationId": "580f5f4c67603cd3204c585b73107f13",
+                "operationId": "8fcfcab21827e5e8a263d380b8f97ef4",
                 "responses": {
                     "200": {
                         "description": "All users retrieved successfully"
@@ -166,13 +166,13 @@
                 }
             }
         },
-        "/api/update-user-role/{id}": {
+        "/update-user-role/{id}": {
             "put": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Update user role",
-                "operationId": "be34d43f20af98c9f7b66fb554a0cb4c",
+                "operationId": "55a7de33e039534a872b25a81ab37a19",
                 "parameters": [
                     {
                         "name": "id",
@@ -206,13 +206,13 @@
                 }
             }
         },
-        "/api/login": {
+        "/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Login user",
-                "operationId": "44212a9096e4b09358281e9ec8a0701d",
+                "operationId": "d618a255475240ba3d40cc39692cd924",
                 "parameters": [
                     {
                         "name": "email",
@@ -246,13 +246,13 @@
                 }
             }
         },
-        "/api/logout": {
+        "/logout": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Logout user",
-                "operationId": "79854151e609bd20032aa5aa4d5a35c0",
+                "operationId": "1e357eb2c93a1bdabebcebfa088332bf",
                 "responses": {
                     "200": {
                         "description": "User logged out successfully"
@@ -260,13 +260,13 @@
                 }
             }
         },
-        "/api/profile": {
+        "/profile": {
             "get": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Get user profile",
-                "operationId": "7e3b0ab44699899907dc284c846a4db1",
+                "operationId": "89b41a6563613a8c5f3062bc9ea139be",
                 "responses": {
                     "200": {
                         "description": "User profile retrieved successfully"
@@ -274,13 +274,13 @@
                 }
             }
         },
-        "/api/authors": {
+        "/authors": {
             "get": {
                 "tags": [
                     "Authors"
                 ],
                 "summary": "Get list of authors",
-                "operationId": "7221682a8b1f36e80fd12fd170950ca1",
+                "operationId": "bfa2d2181ef007d8acae6716a4ad5d31",
                 "parameters": [
                     {
                         "name": "search",
@@ -303,7 +303,7 @@
                     "Authors"
                 ],
                 "summary": "Create a new author",
-                "operationId": "be0a154ae928862480c88a67d7d2ed26",
+                "operationId": "70bb172c243b313f8b6288a5e392b98b",
                 "parameters": [
                     {
                         "name": "name",
@@ -343,13 +343,13 @@
                 }
             }
         },
-        "/api/authors/{id}": {
+        "/authors/{id}": {
             "get": {
                 "tags": [
                     "Authors"
                 ],
                 "summary": "Get author by ID",
-                "operationId": "00578a154adb7ed4ddf1e9271f19dd7d",
+                "operationId": "af59c50e1819a52bd45ce1f563b5998d",
                 "parameters": [
                     {
                         "name": "id",
@@ -375,7 +375,7 @@
                     "Authors"
                 ],
                 "summary": "Update an author",
-                "operationId": "7cef97398cddf9afd800b2b7ed8856bc",
+                "operationId": "8514c4a4d1f9014e6d15f20cf615fbd7",
                 "parameters": [
                     {
                         "name": "id",
@@ -428,7 +428,7 @@
                     "Authors"
                 ],
                 "summary": "Delete an author",
-                "operationId": "635e500cfacd2166d19125ebee8f2c5e",
+                "operationId": "81c17af14f21bdd26cb8b578d261f6ee",
                 "parameters": [
                     {
                         "name": "id",
@@ -450,18 +450,18 @@
                 }
             }
         },
-        "/api/books": {
+        "/books": {
             "get": {
                 "tags": [
                     "Books"
                 ],
-                "summary": "Get list of books",
-                "operationId": "64ce85f06fc87443a16496268e88cddb",
+                "summary": "Retrieve list of books with optional filters",
+                "operationId": "f31a4a8c234eea8c0b2fdcd6634c37ce",
                 "parameters": [
                     {
                         "name": "search",
                         "in": "query",
-                        "description": "Search by title, isbn, or description",
+                        "description": "Keyword for title, ISBN, or description",
                         "required": false,
                         "schema": {
                             "type": "string"
@@ -470,7 +470,7 @@
                     {
                         "name": "category_id",
                         "in": "query",
-                        "description": "Filter by category ID",
+                        "description": "Filter by category",
                         "required": false,
                         "schema": {
                             "type": "integer"
@@ -479,7 +479,7 @@
                     {
                         "name": "author_id",
                         "in": "query",
-                        "description": "Filter by author ID",
+                        "description": "Filter by author",
                         "required": false,
                         "schema": {
                             "type": "integer"
@@ -488,7 +488,7 @@
                     {
                         "name": "publisher_id",
                         "in": "query",
-                        "description": "Filter by publisher ID",
+                        "description": "Filter by publisher",
                         "required": false,
                         "schema": {
                             "type": "integer"
@@ -497,7 +497,7 @@
                     {
                         "name": "available",
                         "in": "query",
-                        "description": "Filter by availability",
+                        "description": "Only show available books",
                         "required": false,
                         "schema": {
                             "type": "boolean"
@@ -506,7 +506,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of books retrieved successfully"
+                        "description": "Books retrieved successfully"
                     }
                 }
             },
@@ -514,118 +514,71 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Create a new book",
-                "operationId": "4114213d13c3b8499c6aec21511edb28",
-                "parameters": [
-                    {
-                        "name": "title",
-                        "in": "query",
-                        "description": "Book title",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "isbn",
-                        "in": "query",
-                        "description": "Book ISBN",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "in": "query",
-                        "description": "Book description",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "publication_year",
-                        "in": "query",
-                        "description": "Book publication year",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "total_copies",
-                        "in": "query",
-                        "description": "Total copies of the book",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "available_copies",
-                        "in": "query",
-                        "description": "Available copies of the book",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "cover_image",
-                        "in": "query",
-                        "description": "Book cover image URL",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "publisher_id",
-                        "in": "query",
-                        "description": "Publisher ID",
-                        "required": false,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "book_shelf_id",
-                        "in": "query",
-                        "description": "Book shelf ID",
-                        "required": false,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "author_ids",
-                        "in": "query",
-                        "description": "Author IDs",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
-                            }
-                        }
-                    },
-                    {
-                        "name": "category_ids",
-                        "in": "query",
-                        "description": "Category IDs",
-                        "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "type": "integer"
+                "summary": "Add a new book",
+                "operationId": "3f946db73e3a02e8e2f56f60c398986b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "isbn",
+                                    "publication_year",
+                                    "total_copies",
+                                    "available_copies",
+                                    "author_ids",
+                                    "category_ids"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "publication_year": {
+                                        "type": "integer"
+                                    },
+                                    "total_copies": {
+                                        "type": "integer"
+                                    },
+                                    "available_copies": {
+                                        "type": "integer"
+                                    },
+                                    "cover_image": {
+                                        "type": "string"
+                                    },
+                                    "publisher_id": {
+                                        "type": "integer"
+                                    },
+                                    "book_shelf_id": {
+                                        "type": "integer"
+                                    },
+                                    "author_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "category_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "201": {
-                        "description": "Book created successfully"
+                        "description": "Book created"
                     },
                     "422": {
                         "description": "Validation error"
@@ -633,18 +586,17 @@
                 }
             }
         },
-        "/api/books/{id}": {
+        "/books/{id}": {
             "get": {
                 "tags": [
                     "Books"
                 ],
-                "summary": "Get a book by ID",
-                "operationId": "e473ab3a66f0daaa9bf1b70b29dd5288",
+                "summary": "Fetch a specific book by ID",
+                "operationId": "3184b7ae54e17e29fd5fa3027972790e",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Book ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -664,13 +616,12 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Update a book by ID",
-                "operationId": "7341e0ef7ae7c978e0f7ef257d9dbba9",
+                "summary": "Update existing book",
+                "operationId": "63f8f46953b2690763bfbaa581da0668",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Book ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -679,7 +630,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Book updated successfully"
+                        "description": "Book updated"
                     },
                     "404": {
                         "description": "Book not found"
@@ -690,13 +641,12 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Delete a book by ID",
-                "operationId": "b74ac8316831ae82112b04392815bd67",
+                "summary": "Remove a book by ID",
+                "operationId": "c286320eba3b96b72b7baf6cd634ac1f",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Book ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -705,7 +655,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Book deleted successfully"
+                        "description": "Book deleted"
                     },
                     "404": {
                         "description": "Book not found"
@@ -713,13 +663,13 @@
                 }
             }
         },
-        "/api/book-shelves": {
+        "/book-shelves": {
             "get": {
                 "tags": [
                     "Book Shelves"
                 ],
                 "summary": "Get list of book shelves",
-                "operationId": "f99831bf46050e4506b6152f63cb2434",
+                "operationId": "2dca346dce3b0ae2aa86ba021930aec5",
                 "parameters": [
                     {
                         "name": "search",
@@ -742,7 +692,7 @@
                     "Book Shelves"
                 ],
                 "summary": "Create a new book shelf",
-                "operationId": "2b612a67e0df8435001611fef8c51b46",
+                "operationId": "597bee85885a3d837e0b732f6e6b4d75",
                 "parameters": [
                     {
                         "name": "code",
@@ -788,13 +738,13 @@
                 }
             }
         },
-        "/api/book-shelves/{id}": {
+        "/book-shelves/{id}": {
             "get": {
                 "tags": [
                     "Book Shelves"
                 ],
                 "summary": "Get a book shelf by ID",
-                "operationId": "3cc938af6bf017414788879fd3f84f76",
+                "operationId": "6627b6f674c7dcb6c3783adce14f83f4",
                 "parameters": [
                     {
                         "name": "id",
@@ -817,7 +767,7 @@
                     "Book Shelves"
                 ],
                 "summary": "Update a book shelf by ID",
-                "operationId": "9ca93d88b756852dc3a6aff8f04f1b6c",
+                "operationId": "b69f1e50cba0fb0b8888febc5d2cc1fd",
                 "parameters": [
                     {
                         "name": "id",
@@ -876,7 +826,7 @@
                     "Book Shelves"
                 ],
                 "summary": "Delete a book shelf by ID",
-                "operationId": "0a6765fa03b07c6525282732407d2175",
+                "operationId": "fc28c72a9f338b9008ede61ebe72f501",
                 "parameters": [
                     {
                         "name": "id",
@@ -895,13 +845,13 @@
                 }
             }
         },
-        "/api/borrows": {
+        "/borrows": {
             "get": {
                 "tags": [
                     "Borrows"
                 ],
                 "summary": "Get list of borrows",
-                "operationId": "f975f995241934f2e38b174ec5cea25b",
+                "operationId": "b224fc4b2d65c2869b2387bf8edb7b21",
                 "parameters": [
                     {
                         "name": "search",
@@ -924,7 +874,7 @@
                     "Borrows"
                 ],
                 "summary": "Create a new borrow",
-                "operationId": "f51fa541881b142e94c752be6bfb5769",
+                "operationId": "65a9ef00ca52852e0bc3802e877ea1bd",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -981,13 +931,13 @@
                 }
             }
         },
-        "/api/borrows/{id}": {
+        "/borrows/{id}": {
             "get": {
                 "tags": [
                     "Borrows"
                 ],
                 "summary": "Get a specific borrow",
-                "operationId": "45afbc3d48ebfc6e551c98a2fde59ddc",
+                "operationId": "2e7984cdb5e637fc0722ea0dc3b517a4",
                 "parameters": [
                     {
                         "name": "id",
@@ -1010,7 +960,7 @@
                     "Borrows"
                 ],
                 "summary": "Delete a borrow record",
-                "operationId": "8c182e8b813ea330bd99cee709fd83f0",
+                "operationId": "4e1cd3b56ae1df4ce352251a0ee5503a",
                 "parameters": [
                     {
                         "name": "id",
@@ -1029,13 +979,13 @@
                 }
             }
         },
-        "/api/borrows/{id}/return": {
+        "/borrows/{id}/return": {
             "put": {
                 "tags": [
                     "Borrows"
                 ],
                 "summary": "Return a book",
-                "operationId": "ec91832992cc991244e4fe8a1e6e2c29",
+                "operationId": "545752f1473fafb9d145bcfa7abfc459",
                 "parameters": [
                     {
                         "name": "id",
@@ -1054,13 +1004,13 @@
                 }
             }
         },
-        "/api/categories": {
+        "/categories": {
             "get": {
                 "tags": [
                     "Categories"
                 ],
                 "summary": "Get list of categories",
-                "operationId": "8e17a9627dbed245cf032f867569cf11",
+                "operationId": "11dc7bee7f8ad5b8d0a6a33493c5ea92",
                 "parameters": [
                     {
                         "name": "search",
@@ -1083,7 +1033,7 @@
                     "Categories"
                 ],
                 "summary": "Create a new category",
-                "operationId": "2140f330d926c3e118cab9391dc4ff42",
+                "operationId": "54a6ffdc26af23674df1830e868e51ff",
                 "parameters": [
                     {
                         "name": "name",
@@ -1111,13 +1061,13 @@
                 }
             }
         },
-        "/api/categories/{id}": {
+        "/categories/{id}": {
             "get": {
                 "tags": [
                     "Categories"
                 ],
                 "summary": "Get a category by ID",
-                "operationId": "6a038665b20191638e1608ea8897bf64",
+                "operationId": "4602bca516df6c4d7c7ba512d05885f4",
                 "parameters": [
                     {
                         "name": "id",
@@ -1140,7 +1090,7 @@
                     "Categories"
                 ],
                 "summary": "Update a category by ID",
-                "operationId": "e4e7aaba2eee4d7e813dea85bf3cf3ed",
+                "operationId": "90f0ef635a607ebe594515971a2dae8e",
                 "parameters": [
                     {
                         "name": "id",
@@ -1181,7 +1131,7 @@
                     "Categories"
                 ],
                 "summary": "Delete a category by ID",
-                "operationId": "f365d407ea3098d6b545847b09322b13",
+                "operationId": "b93f91fff584ced6067071304928cdbe",
                 "parameters": [
                     {
                         "name": "id",
@@ -1200,13 +1150,13 @@
                 }
             }
         },
-        "/api/fines": {
+        "/fines": {
             "get": {
                 "tags": [
                     "Fines"
                 ],
                 "summary": "Get list of fines",
-                "operationId": "6f579899fc8848be19e0a71d43bc264d",
+                "operationId": "a10007ee73d512470027ef6a6c405517",
                 "parameters": [
                     {
                         "name": "search",
@@ -1225,13 +1175,13 @@
                 }
             }
         },
-        "/api/fines/{id}": {
+        "/fines/{id}": {
             "get": {
                 "tags": [
                     "Fines"
                 ],
                 "summary": "Get a fine by ID",
-                "operationId": "2c58af979349f2ca7337dc61ba1c7128",
+                "operationId": "ff4454f82339b1a790b0267e66537d3b",
                 "parameters": [
                     {
                         "name": "id",
@@ -1254,7 +1204,7 @@
                     "Fines"
                 ],
                 "summary": "Pay a fine by ID",
-                "operationId": "9ec9c908b6effead1a4870ef121a6617",
+                "operationId": "356f619c1be9101d8112071bad22b175",
                 "parameters": [
                     {
                         "name": "id",
@@ -1283,13 +1233,13 @@
                 }
             }
         },
-        "/api/publishers": {
+        "/publishers": {
             "get": {
                 "tags": [
                     "Publishers"
                 ],
                 "summary": "Get list of publishers",
-                "operationId": "0e6978143f356068c8b3da3b8fec1d77",
+                "operationId": "3bd4cc69812015c593ab951e82086fe4",
                 "parameters": [
                     {
                         "name": "search",
@@ -1312,7 +1262,7 @@
                     "Publishers"
                 ],
                 "summary": "Create a new publisher",
-                "operationId": "0227fcc34d3841d96128a58bf0e1c60f",
+                "operationId": "f8ef5887ee4a8b92c4fb1e59dbc0f921",
                 "parameters": [
                     {
                         "name": "name",
@@ -1358,13 +1308,13 @@
                 }
             }
         },
-        "/api/publishers/{id}": {
+        "/publishers/{id}": {
             "get": {
                 "tags": [
                     "Publishers"
                 ],
                 "summary": "Get a publisher by ID",
-                "operationId": "810774abe65ad18c56f299cac431dbf9",
+                "operationId": "195d94c133b43756bd8b6131c8fd1d15",
                 "parameters": [
                     {
                         "name": "id",
@@ -1387,7 +1337,7 @@
                     "Publishers"
                 ],
                 "summary": "Update a publisher by ID",
-                "operationId": "0b7dfbc34cda27b7d96334b78d619820",
+                "operationId": "34a526fa28247752169e7a47b409a51e",
                 "parameters": [
                     {
                         "name": "id",
@@ -1446,7 +1396,7 @@
                     "Publishers"
                 ],
                 "summary": "Delete a publisher by ID",
-                "operationId": "a05b78de6dc0cf176d7ec83098039238",
+                "operationId": "881091b822621e7db00a62a3855a1b93",
                 "parameters": [
                     {
                         "name": "id",
@@ -1465,13 +1415,13 @@
                 }
             }
         },
-        "/api/reservations": {
+        "/reservations": {
             "get": {
                 "tags": [
                     "Reservations"
                 ],
                 "summary": "Get list of reservations",
-                "operationId": "26909e6f6eb4a49ab5428889a7ff1067",
+                "operationId": "b8d33d9a2963a7cd60615008cd626a56",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -1512,7 +1462,7 @@
                     "Reservations"
                 ],
                 "summary": "Create a new reservation",
-                "operationId": "b1466042c18abd23d64464649f2442c3",
+                "operationId": "36133bb1e72eeb990aa0187b2afddb2b",
                 "parameters": [
                     {
                         "name": "user_id",
@@ -1560,13 +1510,13 @@
                 }
             }
         },
-        "/api/reservations/{id}": {
+        "/reservations/{id}": {
             "get": {
                 "tags": [
                     "Reservations"
                 ],
                 "summary": "Get a specific reservation",
-                "operationId": "f896182177203ee52325e4cbee5a7c7f",
+                "operationId": "780bd81b9af93bc3af711c4827b90955",
                 "parameters": [
                     {
                         "name": "id",
@@ -1589,7 +1539,7 @@
                     "Reservations"
                 ],
                 "summary": "Update a reservation's status",
-                "operationId": "dea05d4aeaa957d895cad18169c0a013",
+                "operationId": "0058252572cd4cfc9136c717907ed312",
                 "parameters": [
                     {
                         "name": "id",
@@ -1627,7 +1577,7 @@
                     "Reservations"
                 ],
                 "summary": "Delete a reservation",
-                "operationId": "c46682105a40a6b2324956601b05bbf4",
+                "operationId": "eb324f4396575f61a9d1d3a67733847e",
                 "parameters": [
                     {
                         "name": "id",
