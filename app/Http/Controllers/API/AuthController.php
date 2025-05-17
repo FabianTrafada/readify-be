@@ -39,6 +39,13 @@ class AuthController extends Controller
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Parameter(
+     *         name="password confirmation",
+     *         in="query",
+     *         required=true,
+     *         description="User password confirmation",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
      *         name="phone_number",
      *         in="query",
      *         required=false,
@@ -67,7 +74,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
             'phone_number' => 'nullable|string|max:20',
             'address' => 'nullable|string'
         ]);

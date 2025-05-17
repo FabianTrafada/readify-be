@@ -51,6 +51,15 @@
                         }
                     },
                     {
+                        "name": "password confirmation",
+                        "in": "query",
+                        "description": "User password confirmation",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "phone_number",
                         "in": "query",
                         "description": "User phone number",
