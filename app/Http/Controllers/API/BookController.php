@@ -237,4 +237,85 @@ class BookController extends Controller
             'message' => 'Book deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/books/author/{author_id}",
+     *     summary="Get books by author ID",
+     *     tags={"Books"},
+     *     @OA\Parameter(name="author_id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Books retrieved successfully"),
+     *     @OA\Response(response=404, description="Author not found")
+     * )
+     */
+    public function getBooksByAuthorId($author_id)
+    {
+        $books = Book::where('author_id', $author_id)->paginate(10);
+
+        if ($books->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Author not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/books/category/{category_id}",
+     *     summary="Get books by category ID",
+     *     tags={"Books"},
+     *     @OA\Parameter(name="category_id", in="path", required=true, @OA\Schema(type="integer")),
+     *     @OA\Response(response=200, description="Books retrieved successfully"),
+     *     @OA\Response(response=404, description="Category not found")
+     * )
+     */
+    public function getBooksByCategoryId($category_id)
+    {
+        $books = Book::where('category_id', $category_id)->paginate(10);
+
+        if ($books->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Category not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/books/name/{name}",
+     *     summary="Get books by name",
+     *     tags={"Books"},
+     *     @OA\Parameter(name="name", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Books retrieved successfully"),
+     *     @OA\Response(response=404, description="Book not found")
+     * )
+     */
+    public function getBooksByName($name)
+    {
+        $books = Book::where('name', 'like', "%{$name}%")->paginate(10);
+
+        if ($books->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
 }

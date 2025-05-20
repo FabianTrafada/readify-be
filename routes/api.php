@@ -50,11 +50,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/books', [BookController::class, 'store']);
         Route::put('/books/{id}', [BookController::class, 'update']);
         Route::delete('/books/{id}', [BookController::class, 'destroy']);
+        Route::get('/books/author/{author_id}', [BookController::class, 'getBooksByAuthorId']);
+        Route::get('/books/category/{category_id}', [BookController::class, 'getBooksByCategoryId']);
+        Route::get('/books/name/{name}', [BookController::class, 'getBooksByName']);
         
         // Authors management
         Route::post('/authors', [AuthorController::class, 'store']);
         Route::put('/authors/{id}', [AuthorController::class, 'update']);
         Route::delete('/authors/{id}', [AuthorController::class, 'destroy']);
+        Route::get('/authors/name/{name}', [AuthorController::class, 'getAuthorByName']);
+        Route::get('/authors/birth_date/{birth_date}', [AuthorController::class, 'getAuthorByBirthDate']);
         
         // Categories management
         Route::post('/categories', [CategoryController::class, 'store']);

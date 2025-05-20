@@ -459,6 +459,61 @@
                 }
             }
         },
+        "/authors/name/{name}": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get author by name",
+                "operationId": "849aa3f9883301241792d815943787c9",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Author name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Author retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Author not found"
+                    }
+                }
+            }
+        },
+        "/authors/birth_date/{birth_date}": {
+            "get": {
+                "tags": [
+                    "Authors"
+                ],
+                "summary": "Get author by birth_date",
+                "operationId": "a75fd46130ec911fd7193663aa60fb5a",
+                "parameters": [
+                    {
+                        "name": "birth_date",
+                        "in": "path",
+                        "description": "Author birth_date",
+                        "schema": {
+                            "type": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Author retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Author not found"
+                    }
+                }
+            }
+        },
         "/books": {
             "get": {
                 "tags": [
@@ -665,6 +720,87 @@
                 "responses": {
                     "200": {
                         "description": "Book deleted"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            }
+        },
+        "/books/author/{author_id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get books by author ID",
+                "operationId": "ee40f1aa18078e9358f2e099e45f34ac",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Author not found"
+                    }
+                }
+            }
+        },
+        "/books/category/{category_id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get books by category ID",
+                "operationId": "f6e91bf74ad0397efd1d6fc5f2f3a7c1",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    }
+                }
+            }
+        },
+        "/books/name/{name}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get books by name",
+                "operationId": "d94f5c4682d0a8b3d98a857bc87893dc",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully"
                     },
                     "404": {
                         "description": "Book not found"

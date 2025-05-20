@@ -278,4 +278,82 @@ class AuthorController extends Controller
             'message' => 'Author deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/authors/name/{name}",
+     *     summary="Get author by name",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="path",
+     *         required=true,
+     *         description="Author name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
+     */
+    public function getAuthorByName(string $name)
+    {
+        $author = Author::where('name', 'like', "%{$name}%")->paginate(10);
+
+        // Nah, ini nih yang bener! Ceknya pakai isEmpty()
+        if ($author->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Author not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $author
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/authors/birth_date/{birth_date}",
+     *     summary="Get author by birth_date",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="birth_date",
+     *         in="path",
+     *         description="Author birth_date",
+     *         @OA\Schema(type="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
+     */
+    public function getAuthorByBirthDate(string $birth_date)
+    {
+        $author = Author::where('birth_date', $birth_date)->paginate(10);
+
+        if ($author->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Author not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $author
+        ]);
+    }
 }
