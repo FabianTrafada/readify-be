@@ -50,11 +50,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/books', [BookController::class, 'store']);
         Route::put('/books/{id}', [BookController::class, 'update']);
         Route::delete('/books/{id}', [BookController::class, 'destroy']);
+        Route::get('/books/author/{author_id}', [BookController::class, 'getBooksByAuthorId']);
+        Route::get('/books/category/{category_id}', [BookController::class, 'getBooksByCategoryId']);
+        Route::get('/books/name/{name}', [BookController::class, 'getBooksByName']);
         
         // Authors management
         Route::post('/authors', [AuthorController::class, 'store']);
         Route::put('/authors/{id}', [AuthorController::class, 'update']);
         Route::delete('/authors/{id}', [AuthorController::class, 'destroy']);
+        Route::get('/authors/name/{name}', [AuthorController::class, 'getAuthorByName']);
+        Route::get('/authors/birth_date/{birth_date}', [AuthorController::class, 'getAuthorByBirthDate']);
         
         // Categories management
         Route::post('/categories', [CategoryController::class, 'store']);
@@ -76,6 +81,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/borrows/{id}', [BorrowController::class, 'show']);
         Route::post('/borrows/{id}/return', [BorrowController::class, 'returnBook']);
         Route::delete('/borrows/{id}', [BorrowController::class, 'destroy']);
+        Route::get('/borrows/borrow_date/{borrow_date}', [BorrowController::class, 'getBorrowsByBorrowDate']);
+        Route::get('/borrows/due_date/{due_date}', [BorrowController::class, 'getBorrowsByDueDate']);
+        Route::get('/borrows/return_date/{return_date}', [BorrowController::class, 'getBorrowsByReturnDate']);
+
+
         
         // Reservations management
         Route::get('/reservations', [ReservationController::class, 'index']);
@@ -100,6 +110,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/book-shelves/{id}', [BookShelfController::class, 'show']);
         Route::put('/book-shelves/{id}', [BookShelfController::class, 'update']);
         Route::delete('/book-shelves/{id}', [BookShelfController::class, 'destroy']);
+        Route::get('/book-shelves/code/{code}', [BookShelfController::class, 'getBookShelvesByCode']);
+        Route::get('/book-shelves/location/{location}', [BookShelfController::class, 'getBookShelvesByLocation']);
+
+
     });
     
     // Admin only routes

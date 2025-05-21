@@ -12,6 +12,38 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/reservations",
+     *     summary="Get list of reservations",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by user ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by book ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         required=false,
+     *         description="Filter by status",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of reservations retrieved successfully"
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         $query = Reservation::with(['user', 'book']);
@@ -41,6 +73,45 @@ class ReservationController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * @OA\Post(
+     *     path="/reservations",
+     *     summary="Create a new reservation",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="query",
+     *         required=true,
+     *         description="ID of the user",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         in="query",
+     *         required=true,
+     *         description="ID of the book",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="reservation_date",
+     *         in="query",
+     *         required=true,
+     *         description="Reservation date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Parameter(
+     *         name="expiry_date",
+     *         in="query",
+     *         required=true,
+     *         description="Expiry date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Reservation created successfully"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -92,6 +163,24 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
+    /**
+     * @OA\Get(
+     *     path="/reservations/{id}",
+     *     summary="Get a specific reservation",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the reservation",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reservation retrieved successfully"
+     *     )
+     * )
+     */
     public function show(string $id)
     {
         $reservation = Reservation::with(['user', 'book'])->find($id);
@@ -111,6 +200,31 @@ class ReservationController extends Controller
 
     /**
      * Update the specified resource in storage.
+     */
+    /**
+     * @OA\Put(
+     *     path="/reservations/{id}",
+     *     summary="Update a reservation's status",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the reservation",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         required=true,
+     *         description="Status of the reservation",
+     *         @OA\Schema(type="string", enum={"pending", "approved", "canceled", "completed"})
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reservation status updated successfully"
+     *     )
+     * )
      */
     public function updateStatus(Request $request, string $id)
     {
@@ -149,6 +263,24 @@ class ReservationController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * @OA\Delete(
+     *     path="/reservations/{id}",
+     *     summary="Delete a reservation",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the reservation",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reservation deleted successfully"
+     *     )
+     * )
      */
     public function destroy(string $id)
     {

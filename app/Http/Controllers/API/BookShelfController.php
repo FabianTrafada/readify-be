@@ -14,7 +14,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/book-shelves",
+     *     path="/book-shelves",
      *     summary="Get list of book shelves",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -32,15 +32,10 @@ class BookShelfController extends Controller
      */
     public function index(Request $request)
     {
-        $query = BookShelf::query();
-
-        if ($request->has('search')) {
-            $search = $request->search;
+        $bookShelves = BookShelf::when($request->search, function ($query, $search) {
             $query->where('code', 'like', "%{$search}%")
                   ->orWhere('location', 'like', "%{$search}%");
-        }
-
-        $bookShelves = $query->paginate(10);
+        })->paginate(10);
 
         return response()->json([
             'status' => true,
@@ -53,7 +48,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/book-shelves",
+     *     path="/book-shelves",
      *     summary="Create a new book shelf",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -92,12 +87,14 @@ class BookShelfController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'code' => 'required|string|max:50|unique:book_shelves',
             'location' => 'required|string|max:255',
             'capacity' => 'required|integer|min:1',
             'description' => 'nullable|string'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -121,7 +118,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Get a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -159,7 +156,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Update a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -214,12 +211,14 @@ class BookShelfController extends Controller
             ], 404);
         }
 
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'code' => 'sometimes|required|string|max:50|unique:book_shelves,code,' . $id,
             'location' => 'sometimes|required|string|max:255',
             'capacity' => 'sometimes|required|integer|min:1',
             'description' => 'nullable|string'
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -243,7 +242,7 @@ class BookShelfController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/book-shelves/{id}",
+     *     path="/book-shelves/{id}",
      *     summary="Delete a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -270,7 +269,6 @@ class BookShelfController extends Controller
             ], 404);
         }
 
-        // Check if there are books assigned to this shelf
         if ($bookShelf->books()->count() > 0) {
             return response()->json([
                 'status' => false,
@@ -285,4 +283,84 @@ class BookShelfController extends Controller
             'message' => 'Book shelf deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/books/name/{name}",
+     *     summary="Get books by name",
+     *     tags={"Books"},
+     *     @OA\Parameter(name="name", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Books retrieved successfully"),
+     *     @OA\Response(response=404, description="Book not found")
+     * )
+     */
+    public function getBooksByName($name)
+    {
+        $books = Book::where('name', 'like', "%{$name}%")->paginate(10);
+
+        if ($books->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/books/location/{location}",
+     *     summary="Get books by location",
+     *     tags={"Books"},
+     *     @OA\Parameter(name="location", in="path", required=true, @OA\Schema(type="string")),
+     *     @OA\Response(response=200, description="Books retrieved successfully"),
+     *     @OA\Response(response=404, description="Book not found")
+     * )
+     */
+    public function getBooksByLocation($location)
+    {
+        $books = Book::where('location', $location)->paginate(10);
+
+        if ($books->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $books
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/borrows/due_date/{due_date}",
+     *     summary="Get all borrows with due_date field",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="due_date",
+     *         in="path",
+     *         required=true,
+     *         description="Due date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Borrows retrieved successfully"
+     *     )
+     * )
+     */
+    public function getBorrowsByDueDate($due_date)
+    {
+        $borrows = Borrow::where('due_date', $due_date)->get();
+        return response()->json($borrows);
+    }
+
+
 }

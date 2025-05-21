@@ -14,7 +14,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/authors",
+     *     path="/authors",
      *     summary="Get list of authors",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -53,7 +53,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Post(
-     *     path="/api/authors",
+     *     path="/authors",
      *     summary="Create a new author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -117,7 +117,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Get author by ID",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -159,7 +159,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Put(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Update an author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -239,7 +239,7 @@ class AuthorController extends Controller
      */
     /**
      * @OA\Delete(
-     *     path="/api/authors/{id}",
+     *     path="/authors/{id}",
      *     summary="Delete an author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -276,6 +276,84 @@ class AuthorController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Author deleted successfully'
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/authors/name/{name}",
+     *     summary="Get author by name",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="path",
+     *         required=true,
+     *         description="Author name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
+     */
+    public function getAuthorByName(string $name)
+    {
+        $author = Author::where('name', 'like', "%{$name}%")->paginate(10);
+
+        // Nah, ini nih yang bener! Ceknya pakai isEmpty()
+        if ($author->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Author not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $author
+        ]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/authors/birth_date/{birth_date}",
+     *     summary="Get author by birth_date",
+     *     tags={"Authors"},
+     *     @OA\Parameter(
+     *         name="birth_date",
+     *         in="path",
+     *         description="Author birth_date",
+     *         @OA\Schema(type="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Author retrieved successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Author not found"
+     *     )
+     * )
+     */
+    public function getAuthorByBirthDate(string $birth_date)
+    {
+        $author = Author::where('birth_date', $birth_date)->paginate(10);
+
+        if ($author->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Author not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'data' => $author
         ]);
     }
 }
