@@ -138,4 +138,28 @@ class PublisherController extends Controller
             'message' => 'Publisher deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/publishers",
+     *     summary="Get all publishers with name",
+     *     tags={"Publishers"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=true,
+     *         description="Name of the publisher",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Publishers retrieved successfully"
+     *     )
+     * )
+    */
+    public function getAllPublishersWithName(Request $request)
+    {
+        $publishers = Publisher::where('name', $request->name)->get();
+        return response()->json($publishers);
+    }
 }

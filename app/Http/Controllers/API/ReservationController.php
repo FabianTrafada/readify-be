@@ -168,4 +168,52 @@ class ReservationController extends Controller
             'message' => 'Reservation deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/reservations/reservation_date/{reservation_date}",
+     *     summary="Get all reservations with reservation_date",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="reservation_date",
+     *         in="path",
+     *         required=true,
+     *         description="Reservation date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reservations retrieved successfully"
+     *     )
+     * )
+    */
+    public function getAllReservationsWithReservationDate(Request $request)
+    {
+        $reservations = Reservation::where('reservation_date', $request->reservation_date)->get();
+        return response()->json($reservations);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/reservations/expiry_date/{expiry_date}",
+     *     summary="Get all reservations with expiry_date",
+     *     tags={"Reservations"},
+     *     @OA\Parameter(
+     *         name="expiry_date",
+     *         in="path",
+     *         required=true,
+     *         description="Expiry date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Reservations retrieved successfully"
+     *     )
+     * )
+    */
+    public function getAllReservationsWithExpiryDate(Request $request)
+    {
+        $reservations = Reservation::where('expiry_date', $request->expiry_date)->get();
+        return response()->json($reservations);
+    }
 }

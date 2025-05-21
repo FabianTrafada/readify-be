@@ -99,4 +99,52 @@ class FineController extends Controller
             'data' => $fine
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/fines",
+     *     summary="Get all fines with is_paid",
+     *     tags={"Fines"},
+     *     @OA\Parameter(
+     *         name="is_paid",
+     *         in="query",
+     *         required=true,
+     *         description="Payment status of the fine",
+     *         @OA\Schema(type="boolean")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Fines retrieved successfully"
+     *     )
+     * )
+    */
+    public function getAllFinesWithIsPaid(Request $request)
+    {
+        $fines = Fine::where('is_paid', $request->is_paid)->get();
+        return response()->json($fines);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/fines",
+     *     summary="Get all fines with paid_date",
+     *     tags={"Fines"},
+     *     @OA\Parameter(
+     *         name="paid_date",
+     *         in="query",
+     *         required=true,
+     *         description="Date the fine was paid",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Fines retrieved successfully"
+     *     )
+     * )
+    */
+    public function getAllFinesWithPaidDate(Request $request)
+    {
+        $fines = Fine::where('paid_date', $request->paid_date)->get();
+        return response()->json($fines);
+    }
 }

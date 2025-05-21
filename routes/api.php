@@ -60,11 +60,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/categories', [CategoryController::class, 'store']);
         Route::put('/categories/{id}', [CategoryController::class, 'update']);
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+        Route::get('/categories/book/{book_id}', [CategoryController::class, 'getCategoriesByBookId']);
+        Route::get('/categories/author/{author_id}', [CategoryController::class, 'getCategoriesByAuthorId']);
         
         // Publishers management
         Route::post('/publishers', [PublisherController::class, 'store']);
         Route::put('/publishers/{id}', [PublisherController::class, 'update']);
         Route::delete('/publishers/{id}', [PublisherController::class, 'destroy']);
+        Route::get('/publishers/name/{name}', [PublisherController::class, 'getAllPublishersWithName']);
+        
         
         // Borrows management
         Route::get('/borrows', [BorrowController::class, 'index']);
@@ -79,11 +83,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/reservations/{id}', [ReservationController::class, 'show']);
         Route::put('/reservations/{id}/status', [ReservationController::class, 'updateStatus']);
         Route::delete('/reservations/{id}', [ReservationController::class, 'destroy']);
+        Route::get('/reservations/reservation_date/{reservation_date}', [ReservationController::class, 'getAllReservationsWithReservationDate']);
+        Route::get('/reservations/expiry_date/{expiry_date}', [ReservationController::class, 'getAllReservationsWithExpiryDate']);
+
         
         // Fines management
         Route::get('/fines', [FineController::class, 'index']);
         Route::get('/fines/{id}', [FineController::class, 'show']);
         Route::post('/fines/{id}/pay', [FineController::class, 'payFine']);
+        Route::get('/fines/is_paid/{is_paid}', [FineController::class, 'getAllFinesWithIsPaid']);
+        Route::get('/fines/paid_date/{paid_date}', [FineController::class, 'getAllFinesWithPaidDate']);
         
         // Book shelves management
         Route::get('/book-shelves', [BookShelfController::class, 'index']);

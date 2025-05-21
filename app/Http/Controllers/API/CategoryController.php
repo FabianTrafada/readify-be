@@ -238,4 +238,52 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully'
         ]);
     }
+
+     /**
+     * @OA\Get(
+     *     path="/categories/book/{book_id}",
+     *     summary="Get all categories with book id",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="book_id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the book",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categories retrieved successfully"
+     *     )
+     * )
+     */
+    public function getCategoriesByBookId($book_id)
+    {
+        $categories = Category::where('book_id', $book_id)->get();
+        return response()->json($categories);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/categories/author/{author_id}",
+     *     summary="Get all categories with author id",
+     *     tags={"Categories"},
+     *     @OA\Parameter(
+     *         name="author_id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the author",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Categories retrieved successfully"
+     *     )
+     * )
+     */
+    public function getCategoriesByAuthorId($author_id)
+    {
+        $categories = Category::where('author_id', $author_id)->get();
+        return response()->json($categories);
+    }
 }
