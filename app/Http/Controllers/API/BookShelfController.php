@@ -286,36 +286,36 @@ class BookShelfController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/books/name/{name}",
+     *     path="/book-shelves/code/{code}",
      *     summary="Get books by name",
-     *     tags={"Books"},
-     *     @OA\Parameter(name="name", in="path", required=true, @OA\Schema(type="string")),
+     *     tags={"Book Shelves"},
+     *     @OA\Parameter(name="code", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(response=200, description="Books retrieved successfully"),
      *     @OA\Response(response=404, description="Book not found")
      * )
-     */
-    public function getBooksByName($name)
+    */
+    public function getBooksByName($code)
     {
-        $books = Book::where('name', 'like', "%{$name}%")->paginate(10);
+        $books = Book::where('code', 'like', "%{$code}%")->paginate(10);
 
         if ($books->isEmpty()) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Book not found'
             ], 404);
         }
 
         return response()->json([
-            'success' => true,
+            'status' => true,
             'data' => $books
         ]);
     }
 
     /**
      * @OA\Get(
-     *     path="/books/location/{location}",
+     *     path="/book-shelves/location/{location}",
      *     summary="Get books by location",
-     *     tags={"Books"},
+     *     tags={"Book Shelves"},
      *     @OA\Parameter(name="location", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Response(response=200, description="Books retrieved successfully"),
      *     @OA\Response(response=404, description="Book not found")
@@ -327,39 +327,15 @@ class BookShelfController extends Controller
 
         if ($books->isEmpty()) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Book not found'
             ], 404);
         }
 
         return response()->json([
-            'success' => true,
+            'status' => true,
             'data' => $books
         ]);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/borrows/due_date/{due_date}",
-     *     summary="Get all borrows with due_date field",
-     *     tags={"Borrows"},
-     *     @OA\Parameter(
-     *         name="due_date",
-     *         in="path",
-     *         required=true,
-     *         description="Due date",
-     *         @OA\Schema(type="string", format="date")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Borrows retrieved successfully"
-     *     )
-     * )
-     */
-    public function getBorrowsByDueDate($due_date)
-    {
-        $borrows = Borrow::where('due_date', $due_date)->get();
-        return response()->json($borrows);
     }
 
 

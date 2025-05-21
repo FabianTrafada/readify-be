@@ -990,6 +990,60 @@
                 }
             }
         },
+        "/book-shelves/code/{code}": {
+            "get": {
+                "tags": [
+                    "Book Shelves"
+                ],
+                "summary": "Get books by name",
+                "operationId": "ec500d284135568a4aab98362687d195",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            }
+        },
+        "/book-shelves/location/{location}": {
+            "get": {
+                "tags": [
+                    "Book Shelves"
+                ],
+                "summary": "Get books by location",
+                "operationId": "8713c1655f809d5bbffa235e9394e2b5",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Books retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            }
+        },
         "/borrows": {
             "get": {
                 "tags": [
@@ -1149,6 +1203,58 @@
                 }
             }
         },
+        "/borrows/borrow_date/{borrow_date}": {
+            "get": {
+                "tags": [
+                    "Borrows"
+                ],
+                "summary": "Get all borrows with borrow_date field",
+                "operationId": "7a8cc100f0579abac51b260eefcb2fb8",
+                "parameters": [
+                    {
+                        "name": "borrow_date",
+                        "in": "path",
+                        "description": "Borrow date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Borrows retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/borrows/return_date/{return_date}": {
+            "get": {
+                "tags": [
+                    "Borrows"
+                ],
+                "summary": "Get all borrows with return_date field",
+                "operationId": "6a359126765a40ad215d48801753261f",
+                "parameters": [
+                    {
+                        "name": "return_date",
+                        "in": "path",
+                        "description": "Return date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Borrows retrieved successfully"
+                    }
+                }
+            }
+        },
         "/categories": {
             "get": {
                 "tags": [
@@ -1295,6 +1401,56 @@
                 }
             }
         },
+        "/categories/book/{book_id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories with book id",
+                "operationId": "0a4fbd202b5dc6711b757e88a7af7b66",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categories retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/categories/author/{author_id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories with author id",
+                "operationId": "fc068c5f2f77e4489687e3a6c53888ac",
+                "parameters": [
+                    {
+                        "name": "author_id",
+                        "in": "path",
+                        "description": "ID of the author",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categories retrieved successfully"
+                    }
+                }
+            }
+        },
         "/fines": {
             "get": {
                 "tags": [
@@ -1374,6 +1530,57 @@
                 "responses": {
                     "200": {
                         "description": "Fine paid successfully"
+                    }
+                }
+            }
+        },
+        "/fines/is_paid/{is_paid}": {
+            "get": {
+                "tags": [
+                    "Fines"
+                ],
+                "summary": "Get all fines with is_paid",
+                "operationId": "e9f0283c38b1e739fea6d1759c85be29",
+                "parameters": [
+                    {
+                        "name": "is_paid",
+                        "in": "query",
+                        "description": "Payment status of the fine",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fines retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/fines/paid_date/{paid_date}": {
+            "get": {
+                "tags": [
+                    "Fines"
+                ],
+                "summary": "Get all fines with paid_date",
+                "operationId": "f7b20e09571b029b27bd14b0958b77e6",
+                "parameters": [
+                    {
+                        "name": "paid_date",
+                        "in": "query",
+                        "description": "Date the fine was paid",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Fines retrieved successfully"
                     }
                 }
             }
@@ -1560,6 +1767,31 @@
                 }
             }
         },
+        "/publishers/name/{name}": {
+            "get": {
+                "tags": [
+                    "Publishers"
+                ],
+                "summary": "Get all publishers with name",
+                "operationId": "3545e42c46f49b75ea1e2b86a1b6dac4",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the publisher",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Publishers retrieved successfully"
+                    }
+                }
+            }
+        },
         "/reservations": {
             "get": {
                 "tags": [
@@ -1737,6 +1969,58 @@
                 "responses": {
                     "200": {
                         "description": "Reservation deleted successfully"
+                    }
+                }
+            }
+        },
+        "/reservations/reservation_date/{reservation_date}": {
+            "get": {
+                "tags": [
+                    "Reservations"
+                ],
+                "summary": "Get all reservations with reservation_date",
+                "operationId": "8cf8d9abb694089f22b042c1dda3069d",
+                "parameters": [
+                    {
+                        "name": "reservation_date",
+                        "in": "path",
+                        "description": "Reservation date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reservations retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/reservations/expiry_date/{expiry_date}": {
+            "get": {
+                "tags": [
+                    "Reservations"
+                ],
+                "summary": "Get all reservations with expiry_date",
+                "operationId": "6393d34b4b7c16730a97c81eb47b9d2c",
+                "parameters": [
+                    {
+                        "name": "expiry_date",
+                        "in": "path",
+                        "description": "Expiry date",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reservations retrieved successfully"
                     }
                 }
             }

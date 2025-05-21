@@ -163,7 +163,7 @@ class FineController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/fines",
+     *     path="/fines/is_paid/{is_paid}",
      *     summary="Get all fines with is_paid",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -187,7 +187,7 @@ class FineController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/fines",
+     *     path="/fines/paid_date/{paid_date}",
      *     summary="Get all fines with paid_date",
      *     tags={"Fines"},
      *     @OA\Parameter(

@@ -280,12 +280,12 @@ class PublisherController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/publishers",
+     *     path="/publishers/name/{name}",
      *     summary="Get all publishers with name",
      *     tags={"Publishers"},
      *     @OA\Parameter(
      *         name="name",
-     *         in="query",
+     *         in="path",
      *         required=true,
      *         description="Name of the publisher",
      *         @OA\Schema(type="string")
