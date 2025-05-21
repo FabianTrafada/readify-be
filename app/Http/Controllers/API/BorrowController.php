@@ -341,4 +341,52 @@ class BorrowController extends Controller
             'message' => 'Borrow record deleted successfully'
         ]);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/borrows/borrow_date/{borrow_date}",
+     *     summary="Get all borrows with borrow_date field",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="borrow_date",
+     *         in="path",
+     *         required=true,
+     *         description="Borrow date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Borrows retrieved successfully"
+     *     )
+     * )
+     */
+    public function getBorrowsByBorrowDate($borrow_date)
+    {
+        $borrows = Borrow::where('borrow_date', $borrow_date)->get();
+        return response()->json($borrows);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/borrows/return_date/{return_date}",
+     *     summary="Get all borrows with return_date field",
+     *     tags={"Borrows"},
+     *     @OA\Parameter(
+     *         name="return_date",
+     *         in="path",
+     *         required=true,
+     *         description="Return date",
+     *         @OA\Schema(type="string", format="date")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Borrows retrieved successfully"
+     *     )
+     * )
+     */
+    public function getBorrowsByReturnDate($return_date)
+    {
+        $borrows = Borrow::where('return_date', $return_date)->get();
+        return response()->json($borrows);
+    }
 }

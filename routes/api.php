@@ -77,6 +77,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/borrows/{id}', [BorrowController::class, 'show']);
         Route::post('/borrows/{id}/return', [BorrowController::class, 'returnBook']);
         Route::delete('/borrows/{id}', [BorrowController::class, 'destroy']);
+        Route::get('/borrows/borrow_date/{borrow_date}', [BorrowController::class, 'getBorrowsByBorrowDate']);
+        Route::get('/borrows/due_date/{due_date}', [BorrowController::class, 'getBorrowsByDueDate']);
+        Route::get('/borrows/return_date/{return_date}', [BorrowController::class, 'getBorrowsByReturnDate']);
+
+
         
         // Reservations management
         Route::get('/reservations', [ReservationController::class, 'index']);
@@ -96,6 +101,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/book-shelves/{id}', [BookShelfController::class, 'show']);
         Route::put('/book-shelves/{id}', [BookShelfController::class, 'update']);
         Route::delete('/book-shelves/{id}', [BookShelfController::class, 'destroy']);
+        Route::get('/book-shelves/code/{code}', [BookShelfController::class, 'getBookShelvesByCode']);
+        Route::get('/book-shelves/location/{location}', [BookShelfController::class, 'getBookShelvesByLocation']);
+
+
     });
     
     // Admin only routes
