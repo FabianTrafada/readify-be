@@ -11,6 +11,12 @@ namespace App\Http\Controllers;
  *          email="muhammadzelvan263@gmail.com"
  *      )
  * )
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT"
+ * )
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="Readify API Server"

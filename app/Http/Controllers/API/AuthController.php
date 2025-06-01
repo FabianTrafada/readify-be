@@ -109,122 +109,31 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/create-admin",
-     *     summary="Create an admin user",
-     *     tags={"Auth"},
-     *     @OA\Parameter(
-     *         name="name",
-     *         in="query",
-     *         required=true,
-     *         description="User name",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="email",
-     *         in="query",
-     *         required=true,
-     *         description="User email",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="password",
-     *         in="query",
-     *         required=true,
-     *         description="User password",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="phone_number",
-     *         in="query",
-     *         required=false,
-     *         description="User phone number",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="address",
-     *         in="query",
-     *         required=false,
-     *         description="User address",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="role",
-     *         in="query",
-     *         required=true,
-     *         description="User role",
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Admin user created successfully"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Validation error"
-     *     )
-     * )
-     */
-    public function createAdmin(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'phone_number' => 'nullable|string|max:20',
-            'address' => 'nullable|string',
-            'role' => 'required|in:admin,librarian'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'phone_number' => $request->phone_number,
-            'address' => $request->address,
-            'role' => $request->role,
-        ]);
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Admin user created successfully',
-            'data' => $user
-        ], 201);
-    }
-
-    /**
-     * @OA\Get(
-     *     path="/all-users",
-     *     summary="Get all users",
-     *     tags={"Auth"},
-     *     @OA\Response(
-     *         response=200,
-     *         description="All users retrieved successfully"
-     *     )
-     * )
-     */
-    public function getAllUsers()
-    {
-        $users = User::paginate(10);
-
-        return response()->json([
-            'status' => true,
-            'data' => $users
-        ]);
-    }
+ * @OA\Get(
+ *     path="/users",
+ *     summary="Get all users",
+ *     security={{"bearerAuth":{}}},
+ *     tags={"Auth"},
+ *     @OA\Response(
+ *         response=200,
+ *         description="All users retrieved successfully"
+ *     )
+ * )
+ */
+public function getAllUsers()
+{
+    $users = User::paginate(10);
+    return response()->json([
+        'status' => true,
+        'data' => $users
+    ]);
+}
 
     /**
      * @OA\Put(
-     *     path="/update-user-role/{id}",
+     *     path="/users/{id}/role",
      *     summary="Update user role",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Auth"},
      *     @OA\Parameter(
      *         name="id",
@@ -380,6 +289,7 @@ class AuthController extends Controller
      * @OA\Get(
      *     path="/profile",
      *     summary="Get user profile",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Auth"},
      *     @OA\Response(
      *         response=200,

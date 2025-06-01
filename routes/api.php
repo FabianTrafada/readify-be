@@ -119,7 +119,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Admin only routes
     Route::middleware('role:admin')->group(function () {
         // User management
-        Route::get('/users', [AuthController::class, 'index']);
+        Route::get('/users', [AuthController::class, 'getAllUsers']);
         Route::post('/users', [AuthController::class, 'createUser']);
         Route::get('/users/{id}', [AuthController::class, 'showUser']);
         Route::put('/users/{id}', [AuthController::class, 'updateUser']);

@@ -88,100 +88,32 @@
                 }
             }
         },
-        "/create-admin": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Create an admin user",
-                "operationId": "b31f9633ee346601d04b5883e34bd806",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "User name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "User email",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "User password",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "phone_number",
-                        "in": "query",
-                        "description": "User phone number",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "address",
-                        "in": "query",
-                        "description": "User address",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "role",
-                        "in": "query",
-                        "description": "User role",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Admin user created successfully"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/all-users": {
+        "/users": {
             "get": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Get all users",
-                "operationId": "8fcfcab21827e5e8a263d380b8f97ef4",
+                "operationId": "aa6f2559fb4cd1d5ed62ff00d8af946d",
                 "responses": {
                     "200": {
                         "description": "All users retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
-        "/update-user-role/{id}": {
+        "/users/{id}/role": {
             "put": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Update user role",
-                "operationId": "55a7de33e039534a872b25a81ab37a19",
+                "operationId": "bafac050230a550d74130fdeb92cf4fd",
                 "parameters": [
                     {
                         "name": "id",
@@ -212,7 +144,12 @@
                     "422": {
                         "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/login": {
@@ -280,7 +217,12 @@
                     "200": {
                         "description": "User profile retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/authors": {
@@ -2023,6 +1965,15 @@
                         "description": "Reservations retrieved successfully"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
