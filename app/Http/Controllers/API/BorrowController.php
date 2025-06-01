@@ -18,6 +18,7 @@ class BorrowController extends Controller
     /**
      * @OA\Get(
      *     path="/borrows",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of borrows",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -35,33 +36,36 @@ class BorrowController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Borrow::with(['user', 'book']);
+        $query = Borrow::with(["user", "book"]);
 
         // Filter by user
-        if ($request->has('user_id')) {
-            $query->where('user_id', $request->user_id);
+        if ($request->has("user_id")) {
+            $query->where("user_id", $request->user_id);
         }
 
         // Filter by book
-        if ($request->has('book_id')) {
-            $query->where('book_id', $request->book_id);
+        if ($request->has("book_id")) {
+            $query->where("book_id", $request->book_id);
         }
 
         // Filter by status
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
+        if ($request->has("status")) {
+            $query->where("status", $request->status);
         }
 
         // Filter by date range
-        if ($request->has('from_date') && $request->has('to_date')) {
-            $query->whereBetween('borrow_date', [$request->from_date, $request->to_date]);
+        if ($request->has("from_date") && $request->has("to_date")) {
+            $query->whereBetween("borrow_date", [
+                $request->from_date,
+                $request->to_date,
+            ]);
         }
 
         $borrows = $query->paginate(10);
 
         return response()->json([
-            'status' => true,
-            'data' => $borrows
+            "status" => true,
+            "data" => $borrows,
         ]);
     }
 
@@ -71,6 +75,7 @@ class BorrowController extends Controller
     /**
      * @OA\Post(
      *     path="/borrows",
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new borrow",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -117,50 +122,59 @@ class BorrowController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|exists:users,id',
-            'book_id' => 'required|exists:books,id',
-            'borrow_date' => 'required|date',
-            'due_date' => 'required|date|after_or_equal:borrow_date',
-            'notes' => 'nullable|string'
+            "user_id" => "required|exists:users,id",
+            "book_id" => "required|exists:books,id",
+            "borrow_date" => "required|date",
+            "due_date" => "required|date|after_or_equal:borrow_date",
+            "notes" => "nullable|string",
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Validation error",
+                    "errors" => $validator->errors(),
+                ],
+                422
+            );
         }
 
         $book = Book::find($request->book_id);
-        
+
         if ($book->available_copies <= 0) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Book is not available for borrow'
-            ], 400);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Book is not available for borrow",
+                ],
+                400
+            );
         }
 
         $borrow = Borrow::create([
-            'user_id' => $request->user_id,
-            'book_id' => $request->book_id,
-            'borrow_date' => $request->borrow_date,
-            'due_date' => $request->due_date,
-            'status' => 'borrowed',
-            'notes' => $request->notes
+            "user_id" => $request->user_id,
+            "book_id" => $request->book_id,
+            "borrow_date" => $request->borrow_date,
+            "due_date" => $request->due_date,
+            "status" => "borrowed",
+            "notes" => $request->notes,
         ]);
 
         // Update book available copies
         $book->available_copies = $book->available_copies - 1;
         $book->save();
 
-        $borrow->load(['user', 'book']);
+        $borrow->load(["user", "book"]);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Book borrowed successfully',
-            'data' => $borrow
-        ], 201);
+        return response()->json(
+            [
+                "status" => true,
+                "message" => "Book borrowed successfully",
+                "data" => $borrow,
+            ],
+            201
+        );
     }
 
     /**
@@ -169,6 +183,7 @@ class BorrowController extends Controller
     /**
      * @OA\Get(
      *     path="/borrows/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get a specific borrow",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -186,18 +201,21 @@ class BorrowController extends Controller
      */
     public function show(string $id)
     {
-        $borrow = Borrow::with(['user', 'book', 'fine'])->find($id);
+        $borrow = Borrow::with(["user", "book", "fine"])->find($id);
 
         if (!$borrow) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Borrow record not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Borrow record not found",
+                ],
+                404
+            );
         }
 
         return response()->json([
-            'status' => true,
-            'data' => $borrow
+            "status" => true,
+            "data" => $borrow,
         ]);
     }
 
@@ -207,6 +225,7 @@ class BorrowController extends Controller
     /**
      * @OA\Put(
      *     path="/borrows/{id}/return",
+     *     security={{"bearerAuth":{}}},
      *     summary="Return a book",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -227,29 +246,38 @@ class BorrowController extends Controller
         $borrow = Borrow::find($id);
 
         if (!$borrow) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Borrow record not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Borrow record not found",
+                ],
+                404
+            );
         }
 
-        if ($borrow->status === 'returned') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Book already returned'
-            ], 400);
+        if ($borrow->status === "returned") {
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Book already returned",
+                ],
+                400
+            );
         }
 
         $validator = Validator::make($request->all(), [
-            'return_date' => 'required|date'
+            "return_date" => "required|date",
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Validation error",
+                    "errors" => $validator->errors(),
+                ],
+                422
+            );
         }
 
         $returnDate = Carbon::parse($request->return_date);
@@ -260,19 +288,19 @@ class BorrowController extends Controller
         if ($returnDate->gt($dueDate)) {
             $daysLate = $returnDate->diffInDays($dueDate);
             $fineAmount = $daysLate * 1000; // 1000 per day late
-            
+
             // Create fine record
             Fine::create([
-                'borrow_id' => $borrow->id,
-                'user_id' => $borrow->user_id,
-                'amount' => $fineAmount,
-                'reason' => "Book returned {$daysLate} days late"
+                "borrow_id" => $borrow->id,
+                "user_id" => $borrow->user_id,
+                "amount" => $fineAmount,
+                "reason" => "Book returned {$daysLate} days late",
             ]);
         }
 
         $borrow->return_date = $request->return_date;
         $borrow->fine_amount = $fineAmount;
-        $borrow->status = 'returned';
+        $borrow->status = "returned";
         $borrow->save();
 
         // Update book available copies
@@ -280,21 +308,22 @@ class BorrowController extends Controller
         $book->available_copies = $book->available_copies + 1;
         $book->save();
 
-        $borrow->load(['user', 'book', 'fine']);
+        $borrow->load(["user", "book", "fine"]);
 
         return response()->json([
-            'status' => true,
-            'message' => 'Book returned successfully',
-            'data' => $borrow
+            "status" => true,
+            "message" => "Book returned successfully",
+            "data" => $borrow,
         ]);
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     /**
      * @OA\Delete(
      *     path="/borrows/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a borrow record",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -315,14 +344,17 @@ class BorrowController extends Controller
         $borrow = Borrow::find($id);
 
         if (!$borrow) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Borrow record not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Borrow record not found",
+                ],
+                404
+            );
         }
 
         // Check if book is not returned yet
-        if ($borrow->status !== 'returned') {
+        if ($borrow->status !== "returned") {
             // Update book available copies
             $book = Book::find($borrow->book_id);
             $book->available_copies = $book->available_copies + 1;
@@ -333,18 +365,19 @@ class BorrowController extends Controller
         if ($borrow->fine) {
             $borrow->fine->delete();
         }
-        
+
         $borrow->delete();
 
         return response()->json([
-            'status' => true,
-            'message' => 'Borrow record deleted successfully'
+            "status" => true,
+            "message" => "Borrow record deleted successfully",
         ]);
     }
 
     /**
      * @OA\Get(
      *     path="/borrows/borrow_date/{borrow_date}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all borrows with borrow_date field",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -362,13 +395,14 @@ class BorrowController extends Controller
      */
     public function getBorrowsByBorrowDate($borrow_date)
     {
-        $borrows = Borrow::where('borrow_date', $borrow_date)->get();
+        $borrows = Borrow::where("borrow_date", $borrow_date)->get();
         return response()->json($borrows);
     }
 
     /**
      * @OA\Get(
      *     path="/borrows/return_date/{return_date}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all borrows with return_date field",
      *     tags={"Borrows"},
      *     @OA\Parameter(
@@ -386,7 +420,7 @@ class BorrowController extends Controller
      */
     public function getBorrowsByReturnDate($return_date)
     {
-        $borrows = Borrow::where('return_date', $return_date)->get();
+        $borrows = Borrow::where("return_date", $return_date)->get();
         return response()->json($borrows);
     }
 }

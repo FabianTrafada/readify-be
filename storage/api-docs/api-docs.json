@@ -1123,7 +1123,12 @@
                     "200": {
                         "description": "List of borrows retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1184,7 +1189,12 @@
                     "201": {
                         "description": "Borrow created successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/borrows/{id}": {
@@ -1209,7 +1219,12 @@
                     "200": {
                         "description": "Borrow record retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -1232,7 +1247,12 @@
                     "200": {
                         "description": "Borrow record deleted successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/borrows/{id}/return": {
@@ -1257,7 +1277,12 @@
                     "200": {
                         "description": "Book returned successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/borrows/borrow_date/{borrow_date}": {
@@ -1283,7 +1308,12 @@
                     "200": {
                         "description": "Borrows retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/borrows/return_date/{return_date}": {
@@ -1309,7 +1339,12 @@
                     "200": {
                         "description": "Borrows retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/categories": {
@@ -1699,7 +1734,12 @@
                     "200": {
                         "description": "List of publishers retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -1749,7 +1789,12 @@
                     "201": {
                         "description": "Publisher created successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/publishers/{id}": {
@@ -1774,7 +1819,12 @@
                     "200": {
                         "description": "Publisher retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -1833,7 +1883,12 @@
                     "200": {
                         "description": "Publisher updated successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -1856,7 +1911,12 @@
                     "200": {
                         "description": "Publisher deleted successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/publishers/name/{name}": {
@@ -1881,7 +1941,12 @@
                     "200": {
                         "description": "Publishers retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/reservations": {

@@ -34,9 +34,6 @@ Route::get('/book-shelves/{id}', [BookShelfController::class, 'show']);
 Route::get('/book-shelves/code/{code}', [BookShelfController::class, 'getBookShelvesByCode']);
 Route::get('/book-shelves/location/{location}', [BookShelfController::class, 'getBookShelvesByLocation']);
 
-Route::get('/categories/book/{book_id}', [CategoryController::class, 'getCategoriesByBookId']);
-Route::get('/categories/author/{author_id}', [CategoryController::class, 'getCategoriesByAuthorId']);
-
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::get('/authors/{id}', [AuthorController::class, 'show']);
 Route::get('/authors/name/{name}', [AuthorController::class, 'getAuthorByName']);
@@ -44,21 +41,31 @@ Route::get('/authors/birth_date/{birth_date}', [AuthorController::class, 'getAut
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
+Route::get('/categories/book/{book_id}', [CategoryController::class, 'getCategoriesByBookId']);
+Route::get('/categories/author/{author_id}', [CategoryController::class, 'getCategoriesByAuthorId']);
+
 Route::get('/publishers', [PublisherController::class, 'index']);
 Route::get('/publishers/{id}', [PublisherController::class, 'show']);
+Route::get('/publishers/name/{name}', [PublisherController::class, 'getAllPublishersWithName']);
+
+Route::get('/borrows', [BorrowController::class, 'index']);
+Route::get('/borrows/{id}', [BorrowController::class, 'show']);
+Route::get('/borrows/borrow_date/{borrow_date}', [BorrowController::class, 'getBorrowsByBorrowDate']);
+Route::get('/borrows/due_date/{due_date}', [BorrowController::class, 'getBorrowsByDueDate']);
+Route::get('/borrows/return_date/{return_date}', [BorrowController::class, 'getBorrowsByReturnDate']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     // Auth routes
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
-    
+
     // Member routes
     Route::get('/my-borrows', [BorrowController::class, 'userBorrows']);
     Route::get('/my-reservations', [ReservationController::class, 'userReservations']);
     Route::get('/my-fines', [FineController::class, 'userFines']);
     Route::post('/reserve-book', [ReservationController::class, 'reserveBook']);
-    
+
     // Admin & Librarian routes
     Route::middleware('role:admin,librarian')->group(function () {
         // Books management
@@ -70,31 +77,22 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/authors', [AuthorController::class, 'store']);
         Route::put('/authors/{id}', [AuthorController::class, 'update']);
         Route::delete('/authors/{id}', [AuthorController::class, 'destroy']);
-        
+
         // Categories management
         Route::post('/categories', [CategoryController::class, 'store']);
         Route::put('/categories/{id}', [CategoryController::class, 'update']);
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
-        
+
         // Publishers management
         Route::post('/publishers', [PublisherController::class, 'store']);
         Route::put('/publishers/{id}', [PublisherController::class, 'update']);
         Route::delete('/publishers/{id}', [PublisherController::class, 'destroy']);
-        Route::get('/publishers/name/{name}', [PublisherController::class, 'getAllPublishersWithName']);
-        
-        
+
         // Borrows management
-        Route::get('/borrows', [BorrowController::class, 'index']);
         Route::post('/borrows', [BorrowController::class, 'store']);
-        Route::get('/borrows/{id}', [BorrowController::class, 'show']);
         Route::post('/borrows/{id}/return', [BorrowController::class, 'returnBook']);
         Route::delete('/borrows/{id}', [BorrowController::class, 'destroy']);
-        Route::get('/borrows/borrow_date/{borrow_date}', [BorrowController::class, 'getBorrowsByBorrowDate']);
-        Route::get('/borrows/due_date/{due_date}', [BorrowController::class, 'getBorrowsByDueDate']);
-        Route::get('/borrows/return_date/{return_date}', [BorrowController::class, 'getBorrowsByReturnDate']);
 
-
-        
         // Reservations management
         Route::get('/reservations', [ReservationController::class, 'index']);
         Route::post('/reservations', [ReservationController::class, 'store']);
@@ -104,21 +102,21 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/reservations/reservation_date/{reservation_date}', [ReservationController::class, 'getAllReservationsWithReservationDate']);
         Route::get('/reservations/expiry_date/{expiry_date}', [ReservationController::class, 'getAllReservationsWithExpiryDate']);
 
-        
+
         // Fines management
         Route::get('/fines', [FineController::class, 'index']);
         Route::get('/fines/{id}', [FineController::class, 'show']);
         Route::post('/fines/{id}/pay', [FineController::class, 'payFine']);
         Route::get('/fines/is_paid/{is_paid}', [FineController::class, 'getAllFinesWithIsPaid']);
         Route::get('/fines/paid_date/{paid_date}', [FineController::class, 'getAllFinesWithPaidDate']);
-        
+
         // Book shelves management
         Route::post('/book-shelves', [BookShelfController::class, 'store']);
         Route::put('/book-shelves/{id}', [BookShelfController::class, 'update']);
         Route::delete('/book-shelves/{id}', [BookShelfController::class, 'destroy']);
 
     });
-    
+
     // Admin only routes
     Route::middleware('role:admin')->group(function () {
         // User management

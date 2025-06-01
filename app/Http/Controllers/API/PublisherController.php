@@ -15,6 +15,7 @@ class PublisherController extends Controller
     /**
      * @OA\Get(
      *     path="/publishers",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of publishers",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -34,17 +35,18 @@ class PublisherController extends Controller
     {
         $query = Publisher::query();
 
-        if ($request->has('search')) {
+        if ($request->has("search")) {
             $search = $request->search;
-            $query->where('name', 'like', "%{$search}%")
-                  ->orWhere('address', 'like', "%{$search}%");
+            $query
+                ->where("name", "like", "%{$search}%")
+                ->orWhere("address", "like", "%{$search}%");
         }
 
         $publishers = $query->paginate(10);
 
         return response()->json([
-            'status' => true,
-            'data' => $publishers
+            "status" => true,
+            "data" => $publishers,
         ]);
     }
 
@@ -54,6 +56,7 @@ class PublisherController extends Controller
     /**
      * @OA\Post(
      *     path="/publishers",
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new publisher",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -93,27 +96,33 @@ class PublisherController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:publishers',
-            'address' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email'
+            "name" => "required|string|max:255|unique:publishers",
+            "address" => "nullable|string",
+            "phone" => "nullable|string|max:20",
+            "email" => "nullable|email",
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Validation error",
+                    "errors" => $validator->errors(),
+                ],
+                422
+            );
         }
 
         $publisher = Publisher::create($request->all());
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Publisher created successfully',
-            'data' => $publisher
-        ], 201);
+        return response()->json(
+            [
+                "status" => true,
+                "message" => "Publisher created successfully",
+                "data" => $publisher,
+            ],
+            201
+        );
     }
 
     /**
@@ -122,6 +131,7 @@ class PublisherController extends Controller
     /**
      * @OA\Get(
      *     path="/publishers/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -139,18 +149,21 @@ class PublisherController extends Controller
      */
     public function show(string $id)
     {
-        $publisher = Publisher::with('books')->find($id);
+        $publisher = Publisher::with("books")->find($id);
 
         if (!$publisher) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Publisher not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Publisher not found",
+                ],
+                404
+            );
         }
 
         return response()->json([
-            'status' => true,
-            'data' => $publisher
+            "status" => true,
+            "data" => $publisher,
         ]);
     }
 
@@ -160,6 +173,7 @@ class PublisherController extends Controller
     /**
      * @OA\Put(
      *     path="/publishers/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Update a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -208,33 +222,41 @@ class PublisherController extends Controller
         $publisher = Publisher::find($id);
 
         if (!$publisher) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Publisher not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Publisher not found",
+                ],
+                404
+            );
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string|max:255|unique:publishers,name,' . $id,
-            'address' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email'
+            "name" =>
+                "sometimes|required|string|max:255|unique:publishers,name," .
+                $id,
+            "address" => "nullable|string",
+            "phone" => "nullable|string|max:20",
+            "email" => "nullable|email",
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Validation error",
+                    "errors" => $validator->errors(),
+                ],
+                422
+            );
         }
 
         $publisher->update($request->all());
 
         return response()->json([
-            'status' => true,
-            'message' => 'Publisher updated successfully',
-            'data' => $publisher
+            "status" => true,
+            "message" => "Publisher updated successfully",
+            "data" => $publisher,
         ]);
     }
 
@@ -244,6 +266,7 @@ class PublisherController extends Controller
     /**
      * @OA\Delete(
      *     path="/publishers/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a publisher by ID",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -264,23 +287,27 @@ class PublisherController extends Controller
         $publisher = Publisher::find($id);
 
         if (!$publisher) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Publisher not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Publisher not found",
+                ],
+                404
+            );
         }
 
         $publisher->delete();
 
         return response()->json([
-            'status' => true,
-            'message' => 'Publisher deleted successfully'
+            "status" => true,
+            "message" => "Publisher deleted successfully",
         ]);
     }
 
     /**
      * @OA\Get(
      *     path="/publishers/name/{name}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all publishers with name",
      *     tags={"Publishers"},
      *     @OA\Parameter(
@@ -295,10 +322,10 @@ class PublisherController extends Controller
      *         description="Publishers retrieved successfully"
      *     )
      * )
-    */
+     */
     public function getAllPublishersWithName(Request $request)
     {
-        $publishers = Publisher::where('name', $request->name)->get();
+        $publishers = Publisher::where("name", $request->name)->get();
         return response()->json($publishers);
     }
 }

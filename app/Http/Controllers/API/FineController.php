@@ -32,23 +32,23 @@ class FineController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Fine::with(['user', 'borrow']);
+        $query = Fine::with(["user", "borrow"]);
 
         // Filter by user
-        if ($request->has('user_id')) {
-            $query->where('user_id', $request->user_id);
+        if ($request->has("user_id")) {
+            $query->where("user_id", $request->user_id);
         }
 
         // Filter by payment status
-        if ($request->has('is_paid')) {
-            $query->where('is_paid', $request->is_paid === 'true');
+        if ($request->has("is_paid")) {
+            $query->where("is_paid", $request->is_paid === "true");
         }
 
         $fines = $query->paginate(10);
 
         return response()->json([
-            'status' => true,
-            'data' => $fines
+            "status" => true,
+            "data" => $fines,
         ]);
     }
 
@@ -75,18 +75,21 @@ class FineController extends Controller
      */
     public function show(string $id)
     {
-        $fine = Fine::with(['user', 'borrow'])->find($id);
+        $fine = Fine::with(["user", "borrow"])->find($id);
 
         if (!$fine) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Fine not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Fine not found",
+                ],
+                404
+            );
         }
 
         return response()->json([
-            'status' => true,
-            'data' => $fine
+            "status" => true,
+            "data" => $fine,
         ]);
     }
 
@@ -123,41 +126,50 @@ class FineController extends Controller
         $fine = Fine::find($id);
 
         if (!$fine) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Fine not found'
-            ], 404);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Fine not found",
+                ],
+                404
+            );
         }
 
         if ($fine->is_paid) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Fine already paid'
-            ], 400);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Fine already paid",
+                ],
+                400
+            );
         }
 
         $validator = Validator::make($request->all(), [
-            'paid_date' => 'required|date'
+            "paid_date" => "required|date",
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validator->errors()
-            ], 422);
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Validation error",
+                    "errors" => $validator->errors(),
+                ],
+                422
+            );
         }
 
         $fine->is_paid = true;
         $fine->paid_date = $request->paid_date;
         $fine->save();
 
-        $fine->load(['user', 'borrow']);
+        $fine->load(["user", "borrow"]);
 
         return response()->json([
-            'status' => true,
-            'message' => 'Fine paid successfully',
-            'data' => $fine
+            "status" => true,
+            "message" => "Fine paid successfully",
+            "data" => $fine,
         ]);
     }
 
@@ -178,10 +190,10 @@ class FineController extends Controller
      *         description="Fines retrieved successfully"
      *     )
      * )
-    */
+     */
     public function getAllFinesWithIsPaid(Request $request)
     {
-        $fines = Fine::where('is_paid', $request->is_paid)->get();
+        $fines = Fine::where("is_paid", $request->is_paid)->get();
         return response()->json($fines);
     }
 
@@ -202,10 +214,10 @@ class FineController extends Controller
      *         description="Fines retrieved successfully"
      *     )
      * )
-    */
+     */
     public function getAllFinesWithPaidDate(Request $request)
     {
-        $fines = Fine::where('paid_date', $request->paid_date)->get();
+        $fines = Fine::where("paid_date", $request->paid_date)->get();
         return response()->json($fines);
     }
 }
