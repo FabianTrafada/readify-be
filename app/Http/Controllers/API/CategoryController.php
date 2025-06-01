@@ -15,6 +15,7 @@ class CategoryController extends Controller
     /**
      * @OA\Get(
      *     path="/categories",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of categories",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -46,6 +47,7 @@ class CategoryController extends Controller
     /**
      * @OA\Post(
      *     path="/categories",
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new category",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -98,6 +100,7 @@ class CategoryController extends Controller
     /**
      * @OA\Get(
      *     path="/categories/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get a category by ID",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -136,6 +139,7 @@ class CategoryController extends Controller
     /**
      * @OA\Put(
      *     path="/categories/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Update a category by ID",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -204,6 +208,7 @@ class CategoryController extends Controller
     /**
      * @OA\Delete(
      *     path="/categories/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a category by ID",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -242,6 +247,7 @@ class CategoryController extends Controller
      /**
      * @OA\Get(
      *     path="/categories/book/{book_id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all categories with book id",
      *     tags={"Categories"},
      *     @OA\Parameter(
@@ -266,6 +272,7 @@ class CategoryController extends Controller
     /**
      * @OA\Get(
      *     path="/categories/author/{author_id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all categories with author id",
      *     tags={"Categories"},
      *     @OA\Parameter(

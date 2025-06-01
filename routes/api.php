@@ -25,6 +25,17 @@ Route::post('/login', [AuthController::class, 'login']);
 // Search books (public)
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{id}', [BookController::class, 'show']);
+Route::get('/books/author/{author_id}', [BookController::class, 'getBooksByAuthorId']);
+Route::get('/books/category/{category_id}', [BookController::class, 'getBooksByCategoryId']);
+Route::get('/books/name/{name}', [BookController::class, 'getBooksByName']);
+
+Route::get('/book-shelves', [BookShelfController::class, 'index']);
+Route::get('/book-shelves/{id}', [BookShelfController::class, 'show']);
+Route::get('/book-shelves/code/{code}', [BookShelfController::class, 'getBookShelvesByCode']);
+Route::get('/book-shelves/location/{location}', [BookShelfController::class, 'getBookShelvesByLocation']);
+
+Route::get('/categories/book/{book_id}', [CategoryController::class, 'getCategoriesByBookId']);
+Route::get('/categories/author/{author_id}', [CategoryController::class, 'getCategoriesByAuthorId']);
 
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::get('/authors/{id}', [AuthorController::class, 'show']);
@@ -54,10 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/books', [BookController::class, 'store']);
         Route::put('/books/{id}', [BookController::class, 'update']);
         Route::delete('/books/{id}', [BookController::class, 'destroy']);
-        Route::get('/books/author/{author_id}', [BookController::class, 'getBooksByAuthorId']);
-        Route::get('/books/category/{category_id}', [BookController::class, 'getBooksByCategoryId']);
-        Route::get('/books/name/{name}', [BookController::class, 'getBooksByName']);
-        
+
         // Authors management
         Route::post('/authors', [AuthorController::class, 'store']);
         Route::put('/authors/{id}', [AuthorController::class, 'update']);
@@ -67,8 +75,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/categories', [CategoryController::class, 'store']);
         Route::put('/categories/{id}', [CategoryController::class, 'update']);
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
-        Route::get('/categories/book/{book_id}', [CategoryController::class, 'getCategoriesByBookId']);
-        Route::get('/categories/author/{author_id}', [CategoryController::class, 'getCategoriesByAuthorId']);
         
         // Publishers management
         Route::post('/publishers', [PublisherController::class, 'store']);
@@ -107,14 +113,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/fines/paid_date/{paid_date}', [FineController::class, 'getAllFinesWithPaidDate']);
         
         // Book shelves management
-        Route::get('/book-shelves', [BookShelfController::class, 'index']);
         Route::post('/book-shelves', [BookShelfController::class, 'store']);
-        Route::get('/book-shelves/{id}', [BookShelfController::class, 'show']);
         Route::put('/book-shelves/{id}', [BookShelfController::class, 'update']);
         Route::delete('/book-shelves/{id}', [BookShelfController::class, 'destroy']);
-        Route::get('/book-shelves/code/{code}', [BookShelfController::class, 'getBookShelvesByCode']);
-        Route::get('/book-shelves/location/{location}', [BookShelfController::class, 'getBookShelvesByLocation']);
-
 
     });
     

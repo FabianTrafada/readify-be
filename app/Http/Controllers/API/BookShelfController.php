@@ -15,6 +15,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Get(
      *     path="/book-shelves",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of book shelves",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -49,6 +50,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Post(
      *     path="/book-shelves",
+     *     security={{"bearerAuth":{}}},
      *     summary="Create a new book shelf",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -119,6 +121,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Get(
      *     path="/book-shelves/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -157,6 +160,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Put(
      *     path="/book-shelves/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Update a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -243,6 +247,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Delete(
      *     path="/book-shelves/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete a book shelf by ID",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(
@@ -287,6 +292,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Get(
      *     path="/book-shelves/code/{code}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get books by name",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(name="code", in="path", required=true, @OA\Schema(type="string")),
@@ -314,6 +320,7 @@ class BookShelfController extends Controller
     /**
      * @OA\Get(
      *     path="/book-shelves/location/{location}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get books by location",
      *     tags={"Book Shelves"},
      *     @OA\Parameter(name="location", in="path", required=true, @OA\Schema(type="string")),

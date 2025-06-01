@@ -12,6 +12,7 @@ class BookController extends Controller
     /**
      * @OA\Get(
      *     path="/books",
+     *     security={{"bearerAuth":{}}},
      *     summary="Retrieve list of books with optional filters",
      *     tags={"Books"},
      *     @OA\Parameter(name="search", in="query", required=false, description="Keyword for title, ISBN, or description", @OA\Schema(type="string")),
@@ -47,6 +48,7 @@ class BookController extends Controller
     /**
      * @OA\Post(
      *     path="/books",
+     *     security={{"bearerAuth":{}}},
      *     summary="Add a new book",
      *     tags={"Books"},
      *     @OA\RequestBody(required=true, @OA\JsonContent(
@@ -115,6 +117,7 @@ class BookController extends Controller
     /**
      * @OA\Get(
      *     path="/books/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Fetch a specific book by ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
@@ -142,6 +145,7 @@ class BookController extends Controller
     /**
      * @OA\Put(
      *     path="/books/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Update existing book",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
@@ -210,6 +214,7 @@ class BookController extends Controller
     /**
      * @OA\Delete(
      *     path="/books/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Remove a book by ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="id", in="path", required=true, @OA\Schema(type="integer")),
@@ -241,6 +246,7 @@ class BookController extends Controller
     /**
      * @OA\Get(
      *     path="/books/author/{author_id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get books by author ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="author_id", in="path", required=true, @OA\Schema(type="integer")),
@@ -268,6 +274,7 @@ class BookController extends Controller
     /**
      * @OA\Get(
      *     path="/books/category/{category_id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get books by category ID",
      *     tags={"Books"},
      *     @OA\Parameter(name="category_id", in="path", required=true, @OA\Schema(type="integer")),
@@ -295,6 +302,7 @@ class BookController extends Controller
     /**
      * @OA\Get(
      *     path="/books/name/{name}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get books by name",
      *     tags={"Books"},
      *     @OA\Parameter(name="name", in="path", required=true, @OA\Schema(type="string")),
