@@ -15,6 +15,7 @@ class AuthorController extends Controller
     /**
      * @OA\Get(
      *     path="/authors",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of authors",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -55,6 +56,7 @@ class AuthorController extends Controller
      * @OA\Post(
      *     path="/authors",
      *     summary="Create a new author",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Authors"},
      *     @OA\Parameter(
      *         name="name",
@@ -119,6 +121,7 @@ class AuthorController extends Controller
      * @OA\Get(
      *     path="/authors/{id}",
      *     summary="Get author by ID",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Authors"},
      *     @OA\Parameter(
      *         name="id",
@@ -161,6 +164,7 @@ class AuthorController extends Controller
      * @OA\Put(
      *     path="/authors/{id}",
      *     summary="Update an author",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Authors"},
      *     @OA\Parameter(
      *         name="id",
@@ -240,6 +244,7 @@ class AuthorController extends Controller
     /**
      * @OA\Delete(
      *     path="/authors/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Delete an author",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -282,6 +287,7 @@ class AuthorController extends Controller
     /**
      * @OA\Get(
      *     path="/authors/name/{name}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get author by name",
      *     tags={"Authors"},
      *     @OA\Parameter(
@@ -322,6 +328,7 @@ class AuthorController extends Controller
     /**
      * @OA\Get(
      *     path="/authors/birth_date/{birth_date}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get author by birth_date",
      *     tags={"Authors"},
      *     @OA\Parameter(

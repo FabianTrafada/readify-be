@@ -268,6 +268,7 @@ public function getAllUsers()
      * @OA\Post(
      *     path="/logout",
      *     summary="Logout user",
+     *     security={{"bearerAuth":{}}},
      *     tags={"Auth"},
      *     @OA\Response(
      *         response=200,

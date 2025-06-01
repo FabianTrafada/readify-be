@@ -203,7 +203,12 @@
                     "200": {
                         "description": "User logged out successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/profile": {
@@ -247,7 +252,12 @@
                     "200": {
                         "description": "List of authors retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -291,7 +301,12 @@
                     "422": {
                         "description": "Validation error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/authors/{id}": {
@@ -319,7 +334,12 @@
                     "404": {
                         "description": "Author not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -372,7 +392,12 @@
                     "404": {
                         "description": "Author not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -398,7 +423,12 @@
                     "404": {
                         "description": "Author not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/authors/name/{name}": {
@@ -426,7 +456,12 @@
                     "404": {
                         "description": "Author not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/authors/birth_date/{birth_date}": {
@@ -453,7 +488,12 @@
                     "404": {
                         "description": "Author not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/books": {

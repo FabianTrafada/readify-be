@@ -25,8 +25,12 @@ Route::post('/login', [AuthController::class, 'login']);
 // Search books (public)
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/{id}', [BookController::class, 'show']);
+
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::get('/authors/{id}', [AuthorController::class, 'show']);
+Route::get('/authors/name/{name}', [AuthorController::class, 'getAuthorByName']);
+Route::get('/authors/birth_date/{birth_date}', [AuthorController::class, 'getAuthorByBirthDate']);
+
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
 Route::get('/publishers', [PublisherController::class, 'index']);
@@ -58,8 +62,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/authors', [AuthorController::class, 'store']);
         Route::put('/authors/{id}', [AuthorController::class, 'update']);
         Route::delete('/authors/{id}', [AuthorController::class, 'destroy']);
-        Route::get('/authors/name/{name}', [AuthorController::class, 'getAuthorByName']);
-        Route::get('/authors/birth_date/{birth_date}', [AuthorController::class, 'getAuthorByBirthDate']);
         
         // Categories management
         Route::post('/categories', [CategoryController::class, 'store']);
