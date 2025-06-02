@@ -1600,7 +1600,12 @@
                     "200": {
                         "description": "List of fines retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/fines/{id}": {
@@ -1625,7 +1630,12 @@
                     "200": {
                         "description": "Fine retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -1658,7 +1668,12 @@
                     "200": {
                         "description": "Fine paid successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/fines/is_paid/{is_paid}": {
@@ -1683,7 +1698,12 @@
                     "200": {
                         "description": "Fines retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/fines/paid_date/{paid_date}": {
@@ -1709,7 +1729,12 @@
                     "200": {
                         "description": "Fines retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/publishers": {

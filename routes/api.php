@@ -54,6 +54,11 @@ Route::get('/borrows/borrow_date/{borrow_date}', [BorrowController::class, 'getB
 Route::get('/borrows/due_date/{due_date}', [BorrowController::class, 'getBorrowsByDueDate']);
 Route::get('/borrows/return_date/{return_date}', [BorrowController::class, 'getBorrowsByReturnDate']);
 
+Route::get('/fines', [FineController::class, 'index']);
+Route::get('/fines/{id}', [FineController::class, 'show']);
+Route::get('/fines/is_paid/{is_paid}', [FineController::class, 'getAllFinesWithIsPaid']);
+Route::get('/fines/paid_date/{paid_date}', [FineController::class, 'getAllFinesWithPaidDate']);
+
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     // Auth routes

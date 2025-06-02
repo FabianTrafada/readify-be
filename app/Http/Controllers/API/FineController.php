@@ -15,6 +15,7 @@ class FineController extends Controller
     /**
      * @OA\Get(
      *     path="/fines",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get list of fines",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -58,6 +59,7 @@ class FineController extends Controller
     /**
      * @OA\Get(
      *     path="/fines/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get a fine by ID",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -99,6 +101,7 @@ class FineController extends Controller
     /**
      * @OA\Put(
      *     path="/fines/{id}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Pay a fine by ID",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -176,6 +179,7 @@ class FineController extends Controller
     /**
      * @OA\Get(
      *     path="/fines/is_paid/{is_paid}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all fines with is_paid",
      *     tags={"Fines"},
      *     @OA\Parameter(
@@ -200,6 +204,7 @@ class FineController extends Controller
     /**
      * @OA\Get(
      *     path="/fines/paid_date/{paid_date}",
+     *     security={{"bearerAuth":{}}},
      *     summary="Get all fines with paid_date",
      *     tags={"Fines"},
      *     @OA\Parameter(
