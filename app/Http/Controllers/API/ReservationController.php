@@ -15,6 +15,7 @@ class ReservationController extends Controller
     /**
      * @OA\Get(
      *     path="/reservations",
+     * security={{"bearerAuth":{}}},
      *     summary="Get list of reservations",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -77,6 +78,7 @@ class ReservationController extends Controller
     /**
      * @OA\Post(
      *     path="/reservations",
+     * security={{"bearerAuth":{}}},
      *     summary="Create a new reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -166,6 +168,7 @@ class ReservationController extends Controller
     /**
      * @OA\Get(
      *     path="/reservations/{id}",
+     * security={{"bearerAuth":{}}},
      *     summary="Get a specific reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -204,6 +207,7 @@ class ReservationController extends Controller
     /**
      * @OA\Put(
      *     path="/reservations/{id}",
+     * security={{"bearerAuth":{}}},
      *     summary="Update a reservation's status",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -267,6 +271,7 @@ class ReservationController extends Controller
     /**
      * @OA\Delete(
      *     path="/reservations/{id}",
+     * security={{"bearerAuth":{}}},
      *     summary="Delete a reservation",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -304,6 +309,7 @@ class ReservationController extends Controller
     /**
      * @OA\Get(
      *     path="/reservations/reservation_date/{reservation_date}",
+     * security={{"bearerAuth":{}}},
      *     summary="Get all reservations with reservation_date",
      *     tags={"Reservations"},
      *     @OA\Parameter(
@@ -328,6 +334,7 @@ class ReservationController extends Controller
     /**
      * @OA\Get(
      *     path="/reservations/expiry_date/{expiry_date}",
+     * security={{"bearerAuth":{}}},
      *     summary="Get all reservations with expiry_date",
      *     tags={"Reservations"},
      *     @OA\Parameter(

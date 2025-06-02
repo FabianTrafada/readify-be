@@ -2014,7 +2014,12 @@
                     "200": {
                         "description": "List of reservations retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -2066,7 +2071,12 @@
                     "201": {
                         "description": "Reservation created successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/reservations/{id}": {
@@ -2091,7 +2101,12 @@
                     "200": {
                         "description": "Reservation retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -2129,7 +2144,12 @@
                     "200": {
                         "description": "Reservation status updated successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -2152,7 +2172,12 @@
                     "200": {
                         "description": "Reservation deleted successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/reservations/reservation_date/{reservation_date}": {
@@ -2178,7 +2203,12 @@
                     "200": {
                         "description": "Reservations retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/reservations/expiry_date/{expiry_date}": {
@@ -2204,7 +2234,12 @@
                     "200": {
                         "description": "Reservations retrieved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
